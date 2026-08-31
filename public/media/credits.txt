@@ -1,0 +1,5 @@
+Background video source:
+https://www.pexels.com/video/10561887/
+
+Used as temporary concept footage under the Pexels license.
+Replace public/media/hero-car.mp4 and hero-car-poster.jpg with the final brand footage before launch.
