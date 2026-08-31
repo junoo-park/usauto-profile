@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./one-page-site.module.css";
 
 type MobileNavigationProps = {
-  concept: "a" | "b" | "c";
+  concept: "a" | "b";
 };
 
 export function MobileNavigation({ concept }: MobileNavigationProps) {

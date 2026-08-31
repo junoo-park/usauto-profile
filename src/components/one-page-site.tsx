@@ -22,7 +22,7 @@ import { siteContent } from "@/content/site";
 
 import styles from "./one-page-site.module.css";
 
-type Concept = "a" | "b" | "c";
+type Concept = "a" | "b";
 
 type OnePageSiteProps = {
   concept: Concept;
@@ -233,58 +233,6 @@ const comparisonRows = [
 
 const copy = {
   a: {
-    eyebrow: "PRIVATE CONSULTING · BY APPOINTMENT",
-    title: (
-      <>
-        차는 같아도,
-        <br />
-        사는 방법에 따라
-        <br />
-        <strong>가격은 달라집니다.</strong>
-      </>
-    ),
-    description: (
-      <>
-        <strong>일시불 · 할부 · 장기렌트 · 리스</strong>
-        <span>
-          차량 할인부터 금융 조건까지 한 번에 비교해
-          <br />
-          고객님께 가장 합리적인 구매 방법을 찾아드립니다.
-        </span>
-      </>
-    ),
-    trustEyebrow: "OUR STANDARD",
-    trustTitle: "신뢰는 좋은 말보다\n확인 가능한 과정에서 시작됩니다.",
-    activityEyebrow: "RECENT DESK",
-    activityTitle: "최근 상담과 계약 현황",
-  },
-  b: {
-    eyebrow: "US AUTO · SELECTIVE CAR CONSULTING",
-    title: (
-      <>
-        차는 같아도,
-        <br />
-        사는 방법에 따라
-        <br />
-        <strong>가격은 달라집니다.</strong>
-      </>
-    ),
-    description: (
-      <>
-        <strong>일시불 · 할부 · 장기렌트 · 리스</strong>
-        <span>
-          차량 할인부터 금융 조건까지 한 번에 비교해
-          <br />
-          고객님께 가장 합리적인 구매 방법을 찾아드립니다.
-        </span>
-      </>
-    ),
-    trustEyebrow: "THE US AUTO METHOD",
-    trustTitle: "좋은 조건보다 먼저\n좋은 기준을 세웁니다.",
-    activityEyebrow: "LIVE CONSULTING DESK",
-    activityTitle: "오늘의 상담 흐름",
-  },
-  c: {
     eyebrow: "US AUTO · PRIVATE ADVISORY",
     title: (
       <>
@@ -308,43 +256,38 @@ const copy = {
     activityEyebrow: "PRIVATE CONSULTING DESK",
     activityTitle: "최근 상담과 계약 현황",
   },
+  b: {
+    eyebrow: "US AUTO · SMART CAR CONSULTING",
+    title: (
+      <>
+        차는 같아도, 사는 방법에 따라
+        <br />
+        <strong>가격은 달라집니다.</strong>
+      </>
+    ),
+    description: (
+      <>
+        <strong>일시불 · 할부 · 장기렌트 · 리스</strong>
+        <span>
+          차량 할인부터 금융 조건까지 한 번에 비교해
+          <br />
+          고객님께 가장 합리적인 구매 방법을 찾아드립니다.
+        </span>
+      </>
+    ),
+    trustEyebrow: "US AUTO SERVICE STANDARD",
+    trustTitle: "복잡한 조건은 간결하게,\n차량 상담은 끝까지 책임 있게.",
+    activityEyebrow: "REAL-TIME CONSULTING",
+    activityTitle: "최근 상담과 계약 현황",
+  },
 } as const;
 
-function AdvisorProfile() {
-  return (
-    <section className={styles.advisorCard} aria-label={`${siteContent.advisor} 대표 소개`}>
-      <div className={styles.advisorPortrait} role="img" aria-label="김용욱 대표 사진 영역">
-        <Image
-          alt="김용욱 US AUTO 대표"
-          fill
-          priority
-          sizes="(max-width: 640px) 126px, 168px"
-          src="/media/advisor-kim-young-wook.jpg"
-        />
-      </div>
-      <div className={styles.advisorProfile}>
-        <div className={styles.advisorIdentity}>
-          <p>YOUR PERSONAL AUTO ADVISOR</p>
-          <h2>
-            {siteContent.advisor} <span>대표</span>
-          </h2>
-        </div>
-        <p className={styles.advisorPromise}>
-          차량 선택부터 인도까지, 한 사람의 이름으로 끝까지 책임지겠습니다.
-        </p>
-        <div className={styles.advisorTags} aria-label="전문 상담 분야">
-          <span>신차 · 렌트 · 리스</span>
-          <span>중고차 매각</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function AdvisorHeroCard({
+  concept,
   title,
   titleId,
 }: {
+  concept: Concept;
   title: ReactNode;
   titleId: string;
 }) {
@@ -376,14 +319,14 @@ function AdvisorHeroCard({
         <div className={styles.advisorHeroActions}>
           <a
             className={`${styles.heroCta} ${styles.desktopConsultationLink}`}
-            href="#consultation-c-desktop"
+            href={`#consultation-${concept}-desktop`}
           >
             상담 신청
             <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
           </a>
           <a
             className={`${styles.heroCta} ${styles.mobileConsultationLink}`}
-            href="#consultation-c-mobile"
+            href={`#consultation-${concept}-mobile`}
           >
             상담 신청
             <ArrowUpRight aria-hidden="true" size={16} strokeWidth={1.8} />
@@ -525,12 +468,18 @@ export function OnePageSite({ concept }: OnePageSiteProps) {
   const sectionSuffix = concept;
 
   return (
-    <main className={`${styles.site} ${styles[`concept${concept.toUpperCase()}`]}`}>
-      <ConceptSwitcher active={concept} tone="dark" />
+    <main
+      className={`${styles.site} ${styles.conceptC} ${concept === "b" ? styles.conceptBlue : ""}`}
+    >
+      <ConceptSwitcher active={concept} tone={concept === "b" ? "light" : "dark"} />
       <FloatingConsultationActions concept={concept} />
 
       <header className={styles.header}>
-        <a className={styles.wordmark} href={`#home-${sectionSuffix}`} aria-label="US AUTO 첫 화면으로 이동">
+        <a
+          className={`${styles.wordmark} ${concept === "b" ? styles.blueWordmark : ""}`}
+          href={`#home-${sectionSuffix}`}
+          aria-label="US AUTO 첫 화면으로 이동"
+        >
           <Image
             alt=""
             className={styles.brandMark}
@@ -579,50 +528,13 @@ export function OnePageSite({ concept }: OnePageSiteProps) {
           <source src="/media/hero-car.mp4" type="video/mp4" />
         </video>
         <div className={styles.videoOverlay} aria-hidden="true" />
-        {concept === "b" ? (
-          <div className={styles.heroFrame} aria-hidden="true">
-            <span>US / 01</span>
-            <span>PRIVATE AUTOMOTIVE DESK</span>
-          </div>
-        ) : null}
-
         <div className={styles.heroInner}>
           <div className={styles.heroCopy}>
-            {concept === "c" ? (
-              <AdvisorHeroCard
-                title={content.title}
-                titleId={`hero-title-${sectionSuffix}`}
-              />
-            ) : (
-              <>
-                <p className={styles.eyebrow}>{content.eyebrow}</p>
-                <h1 id={`hero-title-${sectionSuffix}`}>{content.title}</h1>
-                <p className={styles.heroDescription}>{content.description}</p>
-
-                {concept === "a" ? <AdvisorProfile /> : null}
-
-                <div className={styles.heroMeta} aria-label="상담 가능 분야">
-                  <span>신차</span>
-                  <span>렌트</span>
-                  <span>리스</span>
-                  <span>중고차 매각</span>
-                </div>
-                <a
-                  className={`${styles.heroCta} ${styles.desktopConsultationLink}`}
-                  href={`#consultation-${sectionSuffix}-desktop`}
-                >
-                  무료 상담 시작하기
-                  <ArrowUpRight aria-hidden="true" size={19} strokeWidth={1.8} />
-                </a>
-                <a
-                  className={`${styles.heroCta} ${styles.mobileConsultationLink}`}
-                  href={`#consultation-${sectionSuffix}-mobile`}
-                >
-                  무료 상담 시작하기
-                  <ArrowUpRight aria-hidden="true" size={19} strokeWidth={1.8} />
-                </a>
-              </>
-            )}
+            <AdvisorHeroCard
+              concept={concept}
+              title={content.title}
+              titleId={`hero-title-${sectionSuffix}`}
+            />
           </div>
 
           <ConsultationForm concept={concept} placement="desktop" />
@@ -870,7 +782,7 @@ export function OnePageSite({ concept }: OnePageSiteProps) {
           <div className={styles.footerLead}>
             <Image
               alt="US AUTO"
-              className={styles.footerBrandLogo}
+              className={`${styles.footerBrandLogo} ${concept === "b" ? styles.blueFooterLogo : ""}`}
               height={67}
               src="/brand/us-auto-logo.png"
               width={120}

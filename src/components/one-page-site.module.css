@@ -2314,6 +2314,425 @@
   background: #080807;
 }
 
+/* Concept B — the same advisor-led structure in a clear cobalt dealer desk */
+.conceptBlue {
+  --surface: #f7f9fd;
+  --surface-soft: #eef4ff;
+  --ink: #17213a;
+  --muted: #69758d;
+  --accent: #2448e8;
+  --accent-soft: #3159f5;
+  --hero-text: #17213a;
+  --line: rgba(23, 43, 89, 0.13);
+  background: #f7f9fd;
+}
+
+.conceptBlue .header {
+  border-bottom-color: rgba(23, 43, 89, 0.12);
+  background: rgba(255, 255, 255, 0.94);
+  color: #17213a;
+  backdrop-filter: blur(16px);
+}
+
+.blueWordmark img,
+.blueFooterLogo {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(96%) saturate(4421%)
+    hue-rotate(228deg) brightness(93%) contrast(102%);
+}
+
+.conceptBlue .header nav a::after {
+  background: #2448e8;
+}
+
+.conceptBlue .headerCall {
+  color: #2448e8;
+}
+
+.conceptBlue .hero {
+  min-height: max(800px, 100svh);
+  background: #eaf0f9;
+  color: #17213a;
+}
+
+.conceptBlue .heroVideo {
+  object-position: 52% center;
+  filter: grayscale(0.12) saturate(0.55) contrast(0.9) brightness(1.18);
+  opacity: 0.38;
+}
+
+.conceptBlue .videoOverlay {
+  background:
+    linear-gradient(90deg, rgba(246, 249, 255, 0.96) 0%, rgba(240, 246, 255, 0.9) 52%, rgba(234, 241, 251, 0.78) 100%),
+    linear-gradient(0deg, rgba(238, 244, 253, 0.92), transparent 48%);
+}
+
+.conceptBlue .heroInner {
+  min-height: max(800px, 100svh);
+  grid-template-columns: minmax(0, 1.3fr) minmax(410px, 0.7fr);
+}
+
+.conceptBlue .advisorHeroCard {
+  min-height: 520px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(248px, 0.95fr);
+}
+
+.conceptBlue .advisorHeroCard::before {
+  inset: 18px 0;
+  border: 1px solid rgba(36, 72, 232, 0.13);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 64px rgba(31, 65, 135, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.conceptBlue .advisorHeroVisual {
+  order: 2;
+  padding: 0 22px 0 0;
+}
+
+.conceptBlue .advisorHeroVisual::before {
+  inset: 20px 7px -12px 22px;
+  border-radius: 28px;
+  background: #dce7ff;
+  box-shadow: none;
+  transform: translate(7px, 3px);
+}
+
+.conceptBlue .advisorHeroPortrait {
+  border: 1px solid rgba(36, 72, 232, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 20px 44px rgba(34, 67, 133, 0.17);
+  transform: none;
+}
+
+.conceptBlue .advisorHeroPortrait::after {
+  background: linear-gradient(0deg, rgba(14, 31, 66, 0.72) 0%, transparent 43%);
+}
+
+.conceptBlue .advisorHeroNameplate {
+  right: 36px;
+  left: 20px;
+}
+
+.conceptBlue .advisorHeroContent {
+  order: 1;
+  padding: 54px 30px 50px 42px;
+}
+
+.conceptBlue .advisorHeroEyebrow {
+  color: #2448e8;
+}
+
+.conceptBlue .advisorHeroContent h1 {
+  color: #17213a;
+}
+
+.conceptBlue .advisorHeroContent h1 strong {
+  color: #2448e8;
+}
+
+.conceptBlue .advisorHeroDescription {
+  color: #69758d;
+}
+
+.conceptBlue .advisorHeroActions .heroCta {
+  border: 1px solid #2448e8;
+  background: #2448e8;
+  color: #fff;
+}
+
+.conceptBlue .advisorHeroActions .heroCta:hover,
+.conceptBlue .advisorHeroActions .heroCta:focus-visible {
+  border-color: #1739ce;
+  background: #1739ce;
+  color: #fff;
+}
+
+.conceptBlue .formPanel {
+  border-color: rgba(36, 72, 232, 0.14);
+  background: rgba(255, 255, 255, 0.97);
+  color: #17213a;
+  box-shadow: 0 24px 64px rgba(31, 65, 135, 0.13);
+  backdrop-filter: blur(18px);
+}
+
+.conceptBlue .formHeading p {
+  color: #2448e8;
+}
+
+.conceptBlue .formHeading .formDescription,
+.conceptBlue .agreement span {
+  color: #69758d;
+}
+
+.conceptBlue .form input:not([type="checkbox"]),
+.conceptBlue .form select {
+  border-color: rgba(23, 43, 89, 0.14);
+  background-color: #f8faff;
+  color: #17213a;
+}
+
+.conceptBlue .form input::placeholder {
+  color: #98a3b7;
+}
+
+.conceptBlue .form select option {
+  background: #fff;
+  color: #17213a;
+}
+
+.conceptBlue .form input:focus,
+.conceptBlue .form select:focus {
+  border-color: #2448e8;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(36, 72, 232, 0.1);
+}
+
+.conceptBlue .form button {
+  background: #2448e8;
+  color: #fff;
+}
+
+.conceptBlue .form button:hover,
+.conceptBlue .form button:focus-visible {
+  background: #1739ce;
+}
+
+.conceptBlue .formFooter {
+  border-top-color: rgba(23, 43, 89, 0.1);
+  background: #f7f9fd;
+  color: #69758d;
+}
+
+.conceptBlue .formFooter a {
+  color: #2448e8;
+}
+
+.conceptBlue .scrollCue {
+  color: rgba(23, 33, 58, 0.52);
+}
+
+.conceptBlue .trust {
+  border: 0;
+  background: #f7f9fd;
+  color: #17213a;
+}
+
+.conceptBlue .trustIntro > p {
+  color: #2448e8;
+}
+
+.conceptBlue .trustList li,
+.conceptBlue .trustList li:last-child {
+  border-color: rgba(36, 72, 232, 0.13);
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(34, 67, 133, 0.055);
+}
+
+.conceptBlue .trustIcon {
+  border-color: rgba(36, 72, 232, 0.24);
+  background: #eef4ff;
+  color: #2448e8;
+}
+
+.conceptBlue .trustList li > span {
+  color: #2448e8;
+  opacity: 0.62;
+}
+
+.conceptBlue .trustList p {
+  color: #69758d;
+}
+
+.conceptBlue .activity {
+  background: #fff;
+  color: #17213a;
+}
+
+.conceptBlue .marqueeViewport::before {
+  background: linear-gradient(90deg, #fff, transparent);
+}
+
+.conceptBlue .marqueeViewport::after {
+  background: linear-gradient(-90deg, #fff, transparent);
+}
+
+.conceptBlue .activityCard {
+  border-color: rgba(23, 43, 89, 0.12);
+  background: #fff;
+  box-shadow: 0 9px 26px rgba(34, 67, 133, 0.06);
+}
+
+.conceptBlue .activityAvatar {
+  border: 0;
+  background: #eef4ff;
+  color: #2448e8;
+}
+
+.conceptBlue .activityCopy strong {
+  color: #17213a;
+}
+
+.conceptBlue .activityCopy p,
+.conceptBlue .activityCard time,
+.conceptBlue .prototypeNote,
+.conceptBlue .activityHeading > span {
+  color: #69758d;
+}
+
+.conceptBlue .activityCopy span {
+  border-color: rgba(36, 72, 232, 0.12);
+  background: #eef4ff;
+  color: #2448e8;
+}
+
+.conceptBlue .comparison {
+  border-top-color: rgba(23, 43, 89, 0.1);
+  background: #f4f7fc;
+}
+
+.conceptBlue .comparisonViewport {
+  border-color: rgba(23, 43, 89, 0.12);
+  background: #fff;
+  box-shadow: 0 16px 44px rgba(34, 67, 133, 0.07);
+}
+
+.conceptBlue .comparisonTable th,
+.conceptBlue .comparisonTable td {
+  border-bottom-color: rgba(23, 43, 89, 0.09);
+}
+
+.conceptBlue .comparisonTable thead th {
+  background: #193994;
+  color: #fff;
+}
+
+.conceptBlue .comparisonTable thead th span {
+  color: #fff;
+}
+
+.conceptBlue .comparisonTable tbody th {
+  background: #fff;
+  color: #17213a;
+  box-shadow: 10px 0 18px rgba(34, 67, 133, 0.045);
+}
+
+.conceptBlue .comparisonTable tbody td {
+  color: #69758d;
+}
+
+.conceptBlue .comparisonTable .comparisonEmphasis {
+  background: #eef4ff;
+  color: #17213a;
+}
+
+.conceptBlue .comparisonCta {
+  border-color: #2448e8;
+  background: #2448e8;
+  color: #fff;
+}
+
+.conceptBlue .comparisonCta:hover,
+.conceptBlue .comparisonCta:focus-visible {
+  border-color: #1739ce;
+  background: #1739ce;
+}
+
+.conceptBlue .reviews {
+  border-top-color: rgba(23, 43, 89, 0.1);
+  background: #fff;
+}
+
+.conceptBlue .reviewCard {
+  border-color: rgba(23, 43, 89, 0.12);
+  background: #f9fbff;
+  box-shadow: 0 10px 30px rgba(34, 67, 133, 0.045);
+}
+
+.conceptBlue .reviewStars {
+  color: #2448e8;
+}
+
+.conceptBlue .financeRail {
+  border-color: rgba(23, 43, 89, 0.1);
+  background: #f5f8fd;
+}
+
+.conceptBlue .financeViewport::before {
+  background: linear-gradient(90deg, #f5f8fd, transparent);
+}
+
+.conceptBlue .financeViewport::after {
+  background: linear-gradient(-90deg, #f5f8fd, transparent);
+}
+
+.conceptBlue .financeGroup li {
+  border-color: rgba(23, 43, 89, 0.09);
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(34, 67, 133, 0.045);
+}
+
+.conceptBlue .mobileConsultation {
+  border-top-color: rgba(23, 43, 89, 0.1);
+  background: #eef4ff;
+}
+
+.conceptBlue .channels {
+  border-top-color: rgba(23, 43, 89, 0.1);
+  background: #f4f7fc;
+}
+
+.conceptBlue .channelBadge {
+  border-color: rgba(23, 43, 89, 0.12);
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(34, 67, 133, 0.06);
+  color: #17213a;
+}
+
+.conceptBlue .channelBadge small {
+  border-left-color: rgba(23, 43, 89, 0.12);
+  color: #7b879d;
+}
+
+.conceptBlue .footer {
+  border-top-color: rgba(23, 43, 89, 0.1);
+  background: #fff;
+  color: #17213a;
+}
+
+.conceptBlue .footerLead p,
+.conceptBlue .footerBusiness dt,
+.conceptBlue .footerBusiness dd,
+.conceptBlue .footerBusiness address,
+.conceptBlue .footerContact a,
+.conceptBlue .footerBottom {
+  color: #69758d;
+}
+
+.conceptBlue .footerBusinessName strong,
+.conceptBlue .footerContact a:nth-of-type(1) {
+  color: #17213a;
+}
+
+.conceptBlue .footerBusinessName span {
+  border-left-color: rgba(23, 43, 89, 0.14);
+  color: #69758d;
+}
+
+.conceptBlue .footerContact > span {
+  color: #2448e8;
+}
+
+.conceptBlue .footerBottom {
+  border-top-color: rgba(23, 43, 89, 0.1);
+}
+
+.conceptBlue .quickActionInquiry,
+.conceptBlue .mobileFloatingCta {
+  background: #2448e8;
+  color: #fff;
+}
+
 @keyframes activityMarquee {
   to {
     transform: translateX(-50%);
@@ -3384,5 +3803,167 @@
   .advisorHeroVisual,
   .advisorHeroContent {
     animation: none;
+  }
+}
+
+@media (max-width: 1180px) {
+  .conceptBlue .advisorHeroCard {
+    grid-template-columns: minmax(0, 1.06fr) minmax(220px, 0.94fr);
+  }
+
+  .conceptBlue .advisorHeroContent {
+    padding: 38px 20px 36px 30px;
+  }
+}
+
+@media (max-width: 960px) {
+  .conceptBlue .mobileFloatingCta {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 14px 34px rgba(36, 72, 232, 0.25);
+  }
+
+  .conceptBlue .mobileMenu > button,
+  .conceptBlue .headerCall {
+    border-color: rgba(23, 43, 89, 0.18);
+    color: #2448e8;
+  }
+
+  .conceptBlue .mobileMenu > button:hover,
+  .conceptBlue .mobileMenu > button:focus-visible,
+  .conceptBlue .mobileMenu:has(.mobileMenuPanel[data-open="true"]) > button {
+    border-color: rgba(36, 72, 232, 0.42);
+    background: #eef4ff;
+    color: #2448e8;
+  }
+
+  .conceptBlue .header:has(.mobileMenuPanel[data-open="true"]) {
+    background: rgba(255, 255, 255, 0.99);
+  }
+
+  .conceptBlue .mobileMenuPanel {
+    background:
+      radial-gradient(circle at 88% 8%, rgba(36, 72, 232, 0.09), transparent 30%),
+      rgba(255, 255, 255, 0.99);
+    color: #17213a;
+  }
+
+  .conceptBlue .mobileMenuPanel[data-open="true"] {
+    border-top-color: rgba(23, 43, 89, 0.1);
+  }
+
+  .conceptBlue .mobileMenuHeading {
+    border-bottom-color: rgba(23, 43, 89, 0.12);
+  }
+
+  .conceptBlue .mobileMenuHeading p,
+  .conceptBlue .mobileMenuPanel nav a span,
+  .conceptBlue .mobileMenuFooter span {
+    color: #2448e8;
+  }
+
+  .conceptBlue .mobileMenuHeading span,
+  .conceptBlue .mobileMenuFooter p {
+    color: #69758d;
+  }
+
+  .conceptBlue .mobileMenuPanel nav a {
+    border-bottom-color: rgba(23, 43, 89, 0.1);
+    color: #17213a;
+  }
+
+  .conceptBlue .mobileMenuPanel nav a:hover,
+  .conceptBlue .mobileMenuPanel nav a:focus-visible {
+    border-color: rgba(36, 72, 232, 0.35);
+    color: #2448e8;
+  }
+
+  .conceptBlue .mobileMenuPanel nav a svg {
+    color: #96a1b5;
+  }
+
+  .conceptBlue .mobileMenuPanel nav a[data-consultation="true"] {
+    border-color: #2448e8;
+    background: #2448e8;
+    color: #fff;
+  }
+
+  .conceptBlue .mobileMenuPanel nav a[data-consultation="true"] span,
+  .conceptBlue .mobileMenuPanel nav a[data-consultation="true"] svg {
+    color: #fff;
+  }
+
+  .conceptBlue .mobileMenuPanel nav a[data-consultation="true"]:hover,
+  .conceptBlue .mobileMenuPanel nav a[data-consultation="true"]:focus-visible {
+    border-color: #1739ce;
+    background: #1739ce;
+  }
+
+  .conceptBlue .heroInner {
+    grid-template-columns: 1fr;
+  }
+
+  .conceptBlue .advisorHeroCard {
+    max-width: 680px;
+    grid-template-columns: minmax(0, 1.06fr) minmax(230px, 0.94fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .conceptBlue .header {
+    border-bottom-color: rgba(23, 43, 89, 0.1);
+  }
+
+  .conceptBlue .heroVideo {
+    object-position: 60% center;
+    opacity: 0.28;
+  }
+
+  .conceptBlue .videoOverlay {
+    background: linear-gradient(180deg, rgba(244, 248, 255, 0.94), rgba(234, 241, 251, 0.97));
+  }
+
+  .conceptBlue .advisorHeroCard {
+    grid-template-columns: 1fr;
+  }
+
+  .conceptBlue .advisorHeroCard::before {
+    inset: 205px 0 0;
+    border-radius: 24px;
+  }
+
+  .conceptBlue .advisorHeroVisual {
+    order: 1;
+    padding: 0;
+  }
+
+  .conceptBlue .advisorHeroVisual::before {
+    inset: 15px -6px -8px 18px;
+    border-radius: 22px;
+    transform: translate(4px, 2px);
+  }
+
+  .conceptBlue .advisorHeroPortrait {
+    border-radius: 22px;
+  }
+
+  .conceptBlue .advisorHeroContent {
+    order: 2;
+    padding: 28px 24px 30px;
+  }
+
+  .conceptBlue .advisorHeroNameplate {
+    right: 18px;
+    left: 20px;
+  }
+
+  .conceptBlue .trustList li,
+  .conceptBlue .trustList li:nth-child(3),
+  .conceptBlue .trustList li:last-child {
+    border-color: rgba(36, 72, 232, 0.13);
+    background: #fff;
+  }
+
+  .conceptBlue .comparisonViewport {
+    border-color: rgba(23, 43, 89, 0.12);
   }
 }

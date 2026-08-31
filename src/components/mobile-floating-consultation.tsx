@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import styles from "./one-page-site.module.css";
 
-type Concept = "a" | "b" | "c";
+type Concept = "a" | "b";
 
 export function MobileFloatingConsultation({ concept }: { concept: Concept }) {
   const [isVisible, setIsVisible] = useState(false);

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 type ConceptSwitcherProps = {
-  active: "a" | "b" | "c";
+  active: "a" | "b";
   tone?: "light" | "dark";
 };
 
@@ -20,9 +20,6 @@ export function ConceptSwitcher({
         </Link>
         <Link aria-current={active === "b" ? "page" : undefined} href="/concept-b">
           B
-        </Link>
-        <Link aria-current={active === "c" ? "page" : undefined} href="/concept-c">
-          C
         </Link>
       </div>
     </nav>

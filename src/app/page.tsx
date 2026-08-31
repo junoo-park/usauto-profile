@@ -5,28 +5,19 @@ const concepts = [
     key: "A",
     href: "/concept-a",
     className: "direction-card-a",
-    label: "PRIVATE SHOWROOM",
-    title: "상담을 공간처럼 느끼는 시안",
-    description: "기존 B안의 블랙 우드와 화이트 마블 분위기를 A안으로 그대로 옮겼습니다.",
-    colors: ["#151412", "#4A3025", "#EFEDE7"],
+    label: "PRIVATE ADVISORY LOUNGE",
+    title: "한 사람의 책임을 깊이 있게 보여주는 시안",
+    description: "기존 C안의 대표 소개 구조와 절제된 블랙·무광 골드 분위기를 최종 A안으로 옮겼습니다.",
+    colors: ["#0E0D0C", "#A68A5C", "#F0ECE3"],
   },
   {
     key: "B",
     href: "/concept-b",
     className: "direction-card-b",
-    label: "MIDNIGHT LEDGER",
-    title: "기준과 과정을 정교하게 보여주는 시안",
-    description: "깊은 블랙 위에 무광 골드의 선과 번호만 남긴 절제된 프라이빗 컨설팅 무드입니다.",
-    colors: ["#0B0B0A", "#9A8054", "#ECE8DF"],
-  },
-  {
-    key: "C",
-    href: "/concept-c",
-    className: "direction-card-c",
-    label: "PRIVATE ADVISORY LOUNGE",
-    title: "두 시안의 장점을 자연스럽게 합친 시안",
-    description: "B안의 깊은 블랙과 무광 골드를 기준으로 A안의 대표 소개와 부드러운 라운드를 결합했습니다.",
-    colors: ["#0E0D0C", "#A68A5C", "#F0ECE3"],
+    label: "BLUE DEALER DESK",
+    title: "밝고 빠르게 조건을 비교하는 시안",
+    description: "같은 상담 구조를 유지하면서 화이트·코발트 블루와 얇은 경계선으로 더 선명하고 친근하게 구성했습니다.",
+    colors: ["#FFFFFF", "#2448E8", "#EEF4FF"],
   },
 ] as const;
 
@@ -35,7 +26,7 @@ export default function Home() {
     <main className="concept-hub">
       <header className="hub-header">
         <p>US AUTO · DESIGN DIRECTIONS</p>
-        <span>3 CONCEPTS / 2026</span>
+        <span>2 CONCEPTS / 2026</span>
       </header>
 
       <section className="hub-intro" aria-labelledby="hub-title">
