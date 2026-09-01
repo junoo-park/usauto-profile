@@ -2355,6 +2355,10 @@
   display: none;
 }
 
+.conceptC:not(.conceptBlue) .trustIntro h2 span + span {
+  padding-top: 10px;
+}
+
 .conceptC .activity {
   background:
     radial-gradient(circle at 84% 10%, rgba(166, 138, 92, 0.06), transparent 24%),
@@ -2451,6 +2455,15 @@
   padding: 7px 14px;
   background: transparent;
   box-shadow: none;
+}
+
+.conceptC:not(.conceptBlue) .financeGroup li[data-partner="삼성카드"] {
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.conceptC:not(.conceptBlue) .financeGroup li[data-partner="삼성카드"] .financeLogo {
+  transform: scale(1.12);
 }
 
 .conceptC:not(.conceptBlue) .financeLogoFrame {
@@ -3158,8 +3171,10 @@
 
 @media (min-width: 1181px) {
   .conceptC:not(.conceptBlue) .trust {
-    grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
-    gap: 20px;
+    grid-template-columns: minmax(0, 352px) minmax(0, 1fr);
+    gap: 8px;
+    padding-right: max(var(--page-gutter), calc((100vw - var(--content-width)) / 2));
+    padding-left: max(var(--page-gutter), calc((100vw - var(--content-width)) / 2));
   }
 
   .conceptC:not(.conceptBlue) .trustIntro {
@@ -3179,7 +3194,8 @@
 
   .conceptC:not(.conceptBlue) .trustList li,
   .conceptC:not(.conceptBlue) .trustList li:last-child {
-    min-height: 260px;
+    min-height: 320px;
+    padding: 28px 24px 26px;
   }
 }
 

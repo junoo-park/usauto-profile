@@ -117,8 +117,8 @@ const financialPartners = [
   { name: "NH캐피탈", logo: "/finance-logos/nh-capital.svg", width: "96%", height: "58%" },
   { name: "MG캐피탈", logo: "/finance-logos/mg-capital.svg", width: "82%", height: "82%" },
   { name: "메리츠캐피탈", logo: "/finance-logos/meritz-capital.png", width: "65%", height: "96%" },
-  { name: "삼성카드", logo: "/finance-logos/samsung-card.jpg", width: "88%", height: "72%", blend: true },
-  { name: "산은캐피탈", logo: "/finance-logos/kdb-capital.gif", width: "92%", height: "68%", blend: true },
+  { name: "삼성카드", logo: "/finance-logos/samsung-card-transparent.png", width: "100%", height: "80%" },
+  { name: "산은캐피탈", logo: "/finance-logos/kdb-capital-transparent.png", width: "100%", height: "78%" },
 ] as const;
 
 const reviewItems = [
@@ -478,7 +478,7 @@ export function OnePageSite({ concept }: OnePageSiteProps) {
             {[0, 1].map((group) => (
               <ul aria-hidden={group === 1 ? "true" : undefined} className={styles.financeGroup} key={group}>
                 {financialPartners.map((partner) => (
-                  <li key={`${group}-${partner.name}`}>
+                  <li data-partner={partner.name} key={`${group}-${partner.name}`}>
                     <span className={styles.financeLogoFrame}>
                       <Image
                         alt={partner.name}
