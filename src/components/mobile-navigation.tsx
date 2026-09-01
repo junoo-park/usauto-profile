@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 
 import styles from "./one-page-site.module.css";
 
@@ -47,6 +47,27 @@ export function MobileNavigation({ concept }: MobileNavigationProps) {
     };
   }, [isOpen]);
 
+  const handleNavigation = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    setIsOpen(false);
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const target = document.querySelector<HTMLElement>(href);
+
+        if (!target) {
+          return;
+        }
+
+        window.history.pushState(null, "", href);
+        target.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    });
+  };
+
   return (
     <div className={styles.mobileMenu}>
       <button
@@ -77,7 +98,7 @@ export function MobileNavigation({ concept }: MobileNavigationProps) {
               data-consultation={index === links.length - 1 || undefined}
               href={link.href}
               key={link.href}
-              onClick={() => setIsOpen(false)}
+              onClick={(event) => handleNavigation(event, link.href)}
               tabIndex={isOpen ? 0 : -1}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>

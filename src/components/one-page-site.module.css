@@ -1,6 +1,7 @@
 .site {
   --content-width: 1280px;
   --page-gutter: 32px;
+  --header-scroll-offset: 90px;
   min-width: 320px;
   overflow: clip;
   background: var(--surface);
@@ -205,7 +206,7 @@
 .hero {
   position: relative;
   min-height: max(780px, 100svh);
-  scroll-margin-top: 76px;
+  scroll-margin-top: var(--header-scroll-offset);
   overflow: hidden;
   background: #25211d;
   color: var(--hero-text);
@@ -690,6 +691,7 @@
   width: 100%;
   max-width: 470px;
   justify-self: end;
+  scroll-margin-top: var(--header-scroll-offset);
   overflow: hidden;
   color: var(--ink);
 }
@@ -854,6 +856,29 @@
   line-height: 1.5;
 }
 
+.honeypot {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.formError {
+  margin: -3px 0 0;
+  color: #b3473f;
+  font-size: 0.64rem;
+  font-weight: 570;
+  line-height: 1.55;
+  word-break: keep-all;
+}
+
+:is(.conceptB, .conceptC) .formError {
+  color: #ef9c92;
+}
+
 .form button {
   display: flex;
   width: 100%;
@@ -891,6 +916,104 @@
 
 .form button:active {
   transform: translateY(1px);
+}
+
+.form button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+  transform: none;
+}
+
+.successDialog {
+  width: min(390px, calc(100vw - 40px));
+  max-width: none;
+  margin: auto;
+  border: 1px solid rgba(192, 166, 119, 0.3);
+  border-radius: 18px;
+  padding: 30px;
+  background: #12110f;
+  color: #f2eee6;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+
+.successDialog[open] {
+  animation: successDialogEnter 200ms ease-out both;
+}
+
+.successDialog::backdrop {
+  background: rgba(4, 4, 3, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.successDialogMark {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgba(192, 166, 119, 0.48);
+  border-radius: 50%;
+  color: var(--accent-soft);
+}
+
+.successDialog h3 {
+  margin: 20px 0 0;
+  font-size: 1.16rem;
+  font-weight: 720;
+  letter-spacing: -0.045em;
+}
+
+.successDialog p {
+  margin: 10px 0 0;
+  color: rgba(236, 232, 223, 0.62);
+  font-size: 0.72rem;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+
+.successDialog button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 24px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #0b0b0a;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
+.successDialog button:hover,
+.successDialog button:focus-visible {
+  background: var(--accent-soft);
+}
+
+.conceptBlue .successDialog {
+  border-color: rgba(40, 89, 152, 0.16);
+  background: #fff;
+  color: #102846;
+  box-shadow: 0 28px 90px rgba(30, 66, 109, 0.22);
+}
+
+.conceptBlue .successDialogMark {
+  border-color: rgba(40, 89, 152, 0.22);
+  background: #eaf1f8;
+  color: #285998;
+}
+
+.conceptBlue .successDialog p {
+  color: #66778a;
+}
+
+.conceptBlue .successDialog button {
+  background: #285998;
+  color: #fff;
+}
+
+.conceptBlue .successDialog button:hover,
+.conceptBlue .successDialog button:focus-visible {
+  background: #174579;
 }
 
 .formFooter {
@@ -953,7 +1076,7 @@
   display: grid;
   grid-template-columns: minmax(270px, 0.82fr) minmax(0, 2.18fr);
   gap: clamp(48px, 6vw, 96px);
-  scroll-margin-top: 76px;
+  scroll-margin-top: var(--header-scroll-offset);
   padding: clamp(62px, 6.4vw, 92px)
     max(var(--page-gutter), calc((100vw - var(--content-width)) / 2 + var(--page-gutter)));
   color: #fff;
@@ -1073,7 +1196,7 @@
 
 .activity {
   position: relative;
-  scroll-margin-top: 76px;
+  scroll-margin-top: var(--header-scroll-offset);
   overflow: hidden;
   padding: clamp(34px, 3.7vw, 52px) 0 clamp(26px, 3vw, 40px);
   background: var(--surface);
@@ -1344,7 +1467,7 @@
 }
 
 .comparison {
-  scroll-margin-top: 76px;
+  scroll-margin-top: var(--header-scroll-offset);
   border-top: 1px solid var(--line);
   padding: 66px var(--page-gutter) 70px;
 }
@@ -1381,7 +1504,7 @@
 }
 
 .comparisonHeading h2 {
-  margin-top: 10px;
+  margin-top: 0;
   font-size: clamp(1.5rem, 2.1vw, 2.12rem);
   font-weight: 710;
   letter-spacing: -0.06em;
@@ -1391,157 +1514,144 @@
   display: block;
   margin-top: 12px;
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.86rem;
   letter-spacing: -0.025em;
 }
 
-.comparisonSwipeHint {
-  display: none;
+.comparisonBoard {
+  overflow: hidden;
+  margin-top: 30px;
+  border: 1px solid rgba(36, 33, 29, 0.18);
+  border-radius: 10px;
 }
 
-.comparisonViewport {
-  overflow: auto hidden;
-  margin-top: 34px;
-  border: 1px solid rgba(36, 33, 29, 0.12);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.66);
-  box-shadow: 0 18px 50px rgba(39, 34, 27, 0.045);
-  scrollbar-color: rgba(168, 132, 87, 0.38) transparent;
-  scrollbar-width: thin;
+:is(.conceptB, .conceptC) .comparisonBoard {
+  border-color: rgba(192, 166, 119, 0.26);
 }
 
-:is(.conceptB, .conceptC) .comparisonViewport {
-  border-color: rgba(192, 166, 119, 0.2);
-  background: #151411;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
-}
-
-.comparisonViewport:focus-visible {
+.comparisonBoard:focus-visible {
   outline: 2px solid var(--accent-soft);
   outline-offset: 3px;
 }
 
-.comparisonTable {
+.comparisonMatrix {
   width: 100%;
-  min-width: 1000px;
+  min-width: 0;
   border-spacing: 0;
   border-collapse: separate;
   table-layout: fixed;
-  font-size: 0.74rem;
+  font-size: 0.95rem;
 }
 
-.comparisonTable th,
-.comparisonTable td {
+.comparisonMatrix th,
+.comparisonMatrix td {
   height: 62px;
   border-bottom: 1px solid rgba(36, 33, 29, 0.08);
-  padding: 10px 18px;
+  padding: 12px 16px;
   text-align: center;
   vertical-align: middle;
 }
 
-:is(.conceptB, .conceptC) .comparisonTable th,
-:is(.conceptB, .conceptC) .comparisonTable td {
+.comparisonMatrix tr > * + * {
+  border-left: 1px solid rgba(36, 33, 29, 0.065);
+}
+
+:is(.conceptB, .conceptC) .comparisonMatrix th,
+:is(.conceptB, .conceptC) .comparisonMatrix td {
   border-bottom-color: rgba(192, 166, 119, 0.12);
 }
 
-.comparisonTable thead th {
-  position: sticky;
-  z-index: 2;
-  top: 0;
+:is(.conceptB, .conceptC) .comparisonMatrix tr > * + * {
+  border-left-color: rgba(192, 166, 119, 0.095);
+}
+
+.comparisonMatrix thead th {
+  position: relative;
   height: 68px;
-  background: #1b1d22;
-  color: #f2efe8;
-  font-size: 0.78rem;
-  font-weight: 680;
-}
-
-:is(.conceptB, .conceptC) .comparisonTable thead th {
-  background: #090908;
-}
-
-.comparisonTable thead th:first-child {
-  left: 0;
-  width: 13%;
-  z-index: 4;
-  text-align: left;
-}
-
-.comparisonTable thead th:not(:first-child) {
-  width: 21.75%;
-}
-
-.comparisonTable thead th span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: var(--accent-soft);
-}
-
-.comparisonTable tbody th {
-  position: sticky;
-  z-index: 1;
-  left: 0;
-  background: #f7f5f0;
+  border-bottom-color: rgba(36, 33, 29, 0.18);
+  padding: 14px 16px;
+  background: rgba(192, 166, 119, 0.075);
   color: var(--ink);
-  font-weight: 680;
+  vertical-align: middle;
+}
+
+:is(.conceptB, .conceptC) .comparisonMatrix thead th {
+  border-bottom-color: rgba(192, 166, 119, 0.26);
+}
+
+.comparisonMatrix thead th:first-child {
+  width: 18%;
+  padding-left: 20px;
   text-align: left;
-  box-shadow: 10px 0 18px rgba(35, 31, 26, 0.03);
 }
 
-:is(.conceptB, .conceptC) .comparisonTable tbody th {
-  background: #151411;
-  box-shadow: 10px 0 18px rgba(0, 0, 0, 0.14);
+.comparisonMatrix thead th:not(:first-child) {
+  width: 20.5%;
 }
 
-.comparisonTable tbody td {
+.comparisonMatrix thead th strong {
+  display: block;
+  margin: 0;
+}
+
+.comparisonMatrix thead th:first-child strong {
+  font-size: 0.96rem;
+  font-weight: 720;
+  letter-spacing: -0.035em;
+}
+
+.comparisonMatrix thead th:not(:first-child) strong {
+  font-size: 1.02rem;
+  font-style: normal;
+  font-weight: 720;
+  letter-spacing: -0.045em;
+}
+
+.comparisonMatrix tbody th {
+  padding-left: 20px;
+  color: var(--ink);
+  font-weight: 720;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.comparisonMatrix tbody td {
   color: var(--muted);
   letter-spacing: -0.025em;
+  line-height: 1.45;
+  word-break: keep-all;
 }
 
-.comparisonTable tbody tr:last-child th,
-.comparisonTable tbody tr:last-child td {
+.comparisonMatrix tbody tr:nth-child(even) th,
+.comparisonMatrix tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.comparisonMatrix tbody th,
+.comparisonMatrix tbody td {
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.comparisonMatrix tbody tr:last-child th,
+.comparisonMatrix tbody tr:last-child td {
   border-bottom: 0;
 }
 
-.comparisonTable td > span,
-.comparisonTable td > small {
-  display: block;
-}
-
-.comparisonTable td > span {
-  line-height: 1.45;
-}
-
-.comparisonTable td > small {
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 0.59rem;
-  opacity: 0.72;
-}
-
-.comparisonTable .comparisonEmphasis {
-  background: rgba(168, 132, 87, 0.095);
-  color: var(--ink);
-  font-weight: 690;
-}
-
-:is(.conceptB, .conceptC) .comparisonTable .comparisonEmphasis {
-  background: rgba(192, 166, 119, 0.075);
-  color: var(--ink);
+.comparisonMobile {
+  display: none;
 }
 
 .comparisonNotice {
   margin: 14px 0 0;
   color: var(--muted);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   line-height: 1.6;
   text-align: center;
   opacity: 0.74;
 }
 
 .comparisonActions {
-  display: flex;
+  display: none;
   justify-content: center;
   margin-top: 26px;
 }
@@ -1557,7 +1667,7 @@
   padding: 0 24px;
   background: var(--accent);
   color: #fff;
-  font-size: 0.74rem;
+  font-size: 0.86rem;
   font-weight: 680;
   transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
@@ -1923,14 +2033,14 @@
 
 .financeGroup li {
   display: flex;
-  width: 164px;
-  min-height: 70px;
+  width: 174px;
+  height: 72px;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  padding: 10px 12px;
+  padding: 12px 16px;
   border: 1px solid rgba(40, 37, 32, 0.09);
-  border-radius: 14px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.76);
   box-shadow: 0 8px 22px rgba(35, 30, 23, 0.035);
   text-align: center;
@@ -1944,19 +2054,26 @@
 
 .financeLogoFrame {
   display: grid;
-  width: 136px;
-  height: 42px;
+  width: 142px;
+  height: 44px;
   place-items: center;
+  line-height: 0;
 }
 
 .financeLogo {
-  width: 100%;
-  height: 100%;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+  object-position: center;
+}
+
+.financeLogo[data-blend="true"] {
+  mix-blend-mode: multiply;
 }
 
 .mobileConsultation {
-  scroll-margin-top: 78px;
+  scroll-margin-top: var(--header-scroll-offset);
 }
 
 .conceptA .mobileConsultation {
@@ -2265,15 +2382,6 @@
   background: #0e0d0c;
 }
 
-.conceptC .comparisonViewport {
-  border-radius: 24px;
-  background: #171512;
-}
-
-.conceptC .comparisonTable tbody th {
-  background: #171512;
-}
-
 .conceptC .reviewCard {
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.035);
@@ -2314,239 +2422,345 @@
   background: #080807;
 }
 
-/* Concept B — the same advisor-led structure in a clear cobalt dealer desk */
+/* Concept B — an official-blue car buying desk with a crisp editorial rhythm */
 .conceptBlue {
-  --surface: #f7f9fd;
-  --surface-soft: #eef4ff;
-  --ink: #17213a;
-  --muted: #69758d;
-  --accent: #2448e8;
-  --accent-soft: #3159f5;
-  --hero-text: #17213a;
-  --line: rgba(23, 43, 89, 0.13);
-  background: #f7f9fd;
+  --surface: #f4f7fb;
+  --surface-soft: #eaf1f8;
+  --ink: #102846;
+  --muted: #66778a;
+  --accent: #285998;
+  --accent-soft: #3b70b2;
+  --hero-text: #102846;
+  --line: rgba(16, 40, 70, 0.13);
+  background: #f4f7fb;
 }
 
 .conceptBlue .header {
-  border-bottom-color: rgba(23, 43, 89, 0.12);
-  background: rgba(255, 255, 255, 0.94);
-  color: #17213a;
-  backdrop-filter: blur(16px);
+  border-bottom-color: rgba(16, 40, 70, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  color: #102846;
+  box-shadow: 0 8px 30px rgba(29, 64, 104, 0.07);
+  backdrop-filter: blur(18px);
 }
 
-.blueWordmark img,
+.blueWordmark img {
+  filter: brightness(0) saturate(100%) invert(33%) sepia(29%) saturate(1655%)
+    hue-rotate(174deg) brightness(86%) contrast(93%);
+}
+
 .blueFooterLogo {
-  filter: brightness(0) saturate(100%) invert(27%) sepia(96%) saturate(4421%)
-    hue-rotate(228deg) brightness(93%) contrast(102%);
+  filter: brightness(0) invert(1);
 }
 
 .conceptBlue .header nav a::after {
-  background: #2448e8;
+  background: #285998;
 }
 
 .conceptBlue .headerCall {
-  color: #2448e8;
+  color: #285998;
 }
 
 .conceptBlue .hero {
-  min-height: max(800px, 100svh);
-  background: #eaf0f9;
-  color: #17213a;
+  min-height: max(740px, calc(100svh - 78px));
+  background: #eef3f8;
+  color: #102846;
+}
+
+.conceptBlue .hero::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 0 58%;
+  background: rgba(204, 220, 236, 0.54);
+  content: "";
+  clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
 }
 
 .conceptBlue .heroVideo {
-  object-position: 52% center;
-  filter: grayscale(0.12) saturate(0.55) contrast(0.9) brightness(1.18);
-  opacity: 0.38;
+  object-position: 61% center;
+  filter: grayscale(0.2) saturate(0.5) contrast(0.92) brightness(1.16);
+  opacity: 0.23;
 }
 
 .conceptBlue .videoOverlay {
   background:
-    linear-gradient(90deg, rgba(246, 249, 255, 0.96) 0%, rgba(240, 246, 255, 0.9) 52%, rgba(234, 241, 251, 0.78) 100%),
-    linear-gradient(0deg, rgba(238, 244, 253, 0.92), transparent 48%);
+    linear-gradient(90deg, #f8fafc 0%, rgba(247, 250, 253, 0.97) 36%, rgba(235, 242, 249, 0.78) 66%, rgba(218, 230, 242, 0.82) 100%),
+    linear-gradient(0deg, rgba(239, 244, 249, 0.9), transparent 46%);
 }
 
 .conceptBlue .heroInner {
-  min-height: max(800px, 100svh);
-  grid-template-columns: minmax(0, 1.3fr) minmax(410px, 0.7fr);
+  min-height: max(740px, calc(100svh - 78px));
+  grid-template-columns: minmax(0, 1.38fr) minmax(380px, 0.62fr);
+  gap: clamp(28px, 3.2vw, 46px);
+  padding-top: 48px;
+  padding-bottom: 52px;
+}
+
+.conceptBlue .heroCopy {
+  max-width: 800px;
+  padding-bottom: 0;
 }
 
 .conceptBlue .advisorHeroCard {
   min-height: 520px;
-  grid-template-columns: minmax(0, 1.05fr) minmax(248px, 0.95fr);
+  grid-template-columns: minmax(0, 0.98fr) minmax(265px, 1.02fr);
 }
 
 .conceptBlue .advisorHeroCard::before {
-  inset: 18px 0;
-  border: 1px solid rgba(36, 72, 232, 0.13);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 24px 64px rgba(31, 65, 135, 0.12);
-  backdrop-filter: blur(18px);
+  inset: 24px 0;
+  border: 0;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 26px 70px rgba(30, 66, 109, 0.15);
+  backdrop-filter: none;
 }
 
 .conceptBlue .advisorHeroVisual {
+  display: flex;
+  align-self: stretch;
   order: 2;
-  padding: 0 22px 0 0;
+  align-items: stretch;
+  padding: 0 18px 0 0;
 }
 
 .conceptBlue .advisorHeroVisual::before {
-  inset: 20px 7px -12px 22px;
-  border-radius: 28px;
-  background: #dce7ff;
-  box-shadow: none;
-  transform: translate(7px, 3px);
+  display: none;
 }
 
 .conceptBlue .advisorHeroPortrait {
-  border: 1px solid rgba(36, 72, 232, 0.12);
-  border-radius: 24px;
-  box-shadow: 0 20px 44px rgba(34, 67, 133, 0.17);
+  width: 100%;
+  min-height: 464px;
+  align-self: stretch;
+  margin: 28px 0;
+  border: 0;
+  border-radius: 0 14px 14px 0;
+  background: #d9dde2;
+  box-shadow: none;
   transform: none;
 }
 
 .conceptBlue .advisorHeroPortrait::after {
-  background: linear-gradient(0deg, rgba(14, 31, 66, 0.72) 0%, transparent 43%);
+  background: linear-gradient(0deg, rgba(11, 39, 72, 0.72) 0%, rgba(11, 39, 72, 0.05) 44%, transparent 64%);
+}
+
+.conceptBlue .advisorHeroPortrait img {
+  object-position: center 41%;
 }
 
 .conceptBlue .advisorHeroNameplate {
-  right: 36px;
+  right: 32px;
+  bottom: 48px;
   left: 20px;
 }
 
+.conceptBlue .advisorHeroNameplate strong {
+  font-size: 1.06rem;
+}
+
 .conceptBlue .advisorHeroContent {
+  align-self: stretch;
   order: 1;
-  padding: 54px 30px 50px 42px;
+  margin: 28px 0;
+  border-radius: 14px 0 0 14px;
+  padding: 50px 34px 46px 40px;
+  background: #285998;
+  color: #fff;
 }
 
 .conceptBlue .advisorHeroEyebrow {
-  color: #2448e8;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.conceptBlue .advisorHeroEyebrow::before {
+  background: #a9c9e9;
 }
 
 .conceptBlue .advisorHeroContent h1 {
-  color: #17213a;
+  color: #fff;
+  font-size: clamp(2rem, 2.6vw, 3.08rem);
+  line-height: 1.14;
 }
 
 .conceptBlue .advisorHeroContent h1 strong {
-  color: #2448e8;
+  color: #dbeeff;
 }
 
 .conceptBlue .advisorHeroDescription {
-  color: #69758d;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.75;
 }
 
 .conceptBlue .advisorHeroActions .heroCta {
-  border: 1px solid #2448e8;
-  background: #2448e8;
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  border-radius: 999px;
+  background: #fff;
+  color: #285998;
 }
 
 .conceptBlue .advisorHeroActions .heroCta:hover,
 .conceptBlue .advisorHeroActions .heroCta:focus-visible {
-  border-color: #1739ce;
-  background: #1739ce;
-  color: #fff;
+  border-color: #fff;
+  background: #eaf3fb;
+  color: #174579;
 }
 
 .conceptBlue .formPanel {
-  border-color: rgba(36, 72, 232, 0.14);
-  background: rgba(255, 255, 255, 0.97);
-  color: #17213a;
-  box-shadow: 0 24px 64px rgba(31, 65, 135, 0.13);
+  max-width: 420px;
+  border: 0;
+  border-top: 4px solid #285998;
+  border-radius: 4px 4px 18px 18px;
+  background: rgba(255, 255, 255, 0.98);
+  color: #102846;
+  box-shadow: 0 24px 70px rgba(30, 66, 109, 0.16);
   backdrop-filter: blur(18px);
 }
 
+.conceptBlue .formHeading {
+  padding: 27px 28px 18px;
+}
+
 .conceptBlue .formHeading p {
-  color: #2448e8;
+  color: #285998;
 }
 
 .conceptBlue .formHeading .formDescription,
 .conceptBlue .agreement span {
-  color: #69758d;
+  color: #66778a;
+}
+
+.conceptBlue .form {
+  gap: 14px;
+  padding: 0 28px 24px;
 }
 
 .conceptBlue .form input:not([type="checkbox"]),
 .conceptBlue .form select {
-  border-color: rgba(23, 43, 89, 0.14);
-  background-color: #f8faff;
-  color: #17213a;
+  height: 47px;
+  border-color: rgba(16, 40, 70, 0.14);
+  border-radius: 8px;
+  background-color: #f7f9fc;
+  color: #102846;
 }
 
 .conceptBlue .form input::placeholder {
-  color: #98a3b7;
+  color: #94a0ae;
 }
 
 .conceptBlue .form select option {
   background: #fff;
-  color: #17213a;
+  color: #102846;
 }
 
 .conceptBlue .form input:focus,
 .conceptBlue .form select:focus {
-  border-color: #2448e8;
+  border-color: #285998;
   background-color: #fff;
-  box-shadow: 0 0 0 3px rgba(36, 72, 232, 0.1);
+  box-shadow: 0 0 0 3px rgba(40, 89, 152, 0.1);
 }
 
 .conceptBlue .form button {
-  background: #2448e8;
+  min-height: 50px;
+  border-radius: 8px;
+  background: #285998;
   color: #fff;
 }
 
 .conceptBlue .form button:hover,
 .conceptBlue .form button:focus-visible {
-  background: #1739ce;
+  background: #174579;
 }
 
 .conceptBlue .formFooter {
-  border-top-color: rgba(23, 43, 89, 0.1);
-  background: #f7f9fd;
-  color: #69758d;
+  border-top-color: rgba(16, 40, 70, 0.09);
+  background: #f3f7fb;
+  color: #66778a;
 }
 
 .conceptBlue .formFooter a {
-  color: #2448e8;
+  color: #285998;
 }
 
 .conceptBlue .scrollCue {
-  color: rgba(23, 33, 58, 0.52);
+  color: rgba(16, 40, 70, 0.48);
 }
 
 .conceptBlue .trust {
+  grid-template-columns: 1fr;
+  gap: clamp(28px, 3vw, 40px);
   border: 0;
-  background: #f7f9fd;
-  color: #17213a;
+  padding-top: clamp(50px, 5vw, 68px);
+  padding-bottom: clamp(50px, 5vw, 68px);
+  background: #285998;
+  color: #fff;
+}
+
+.conceptBlue .trustIntro {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.58fr) minmax(0, 1.42fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: end;
+  padding-right: 0;
 }
 
 .conceptBlue .trustIntro > p {
-  color: #2448e8;
+  color: #bcd7f1;
+}
+
+.conceptBlue .trustIntro h2 {
+  max-width: 680px;
+  margin: 0;
+}
+
+.conceptBlue .trustList {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.055);
 }
 
 .conceptBlue .trustList li,
 .conceptBlue .trustList li:last-child {
-  border-color: rgba(36, 72, 232, 0.13);
-  background: #fff;
-  box-shadow: 0 12px 32px rgba(34, 67, 133, 0.055);
+  min-height: 188px;
+  border-color: rgba(255, 255, 255, 0.16);
+  padding: 24px 22px 20px;
+  background: transparent;
+  box-shadow: none;
 }
 
 .conceptBlue .trustIcon {
-  border-color: rgba(36, 72, 232, 0.24);
-  background: #eef4ff;
-  color: #2448e8;
+  width: 48px;
+  height: 48px;
+  border-color: rgba(255, 255, 255, 0.32);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
 .conceptBlue .trustList li > span {
-  color: #2448e8;
-  opacity: 0.62;
+  top: 26px;
+  right: 22px;
+  color: #fff;
+  opacity: 0.5;
+}
+
+.conceptBlue .trustList h3 {
+  margin-top: 26px;
 }
 
 .conceptBlue .trustList p {
-  color: #69758d;
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .conceptBlue .activity {
+  padding-top: 32px;
+  padding-bottom: 28px;
   background: #fff;
-  color: #17213a;
+  color: #102846;
+}
+
+.conceptBlue .activityHeading > div > p {
+  color: #285998;
 }
 
 .conceptBlue .marqueeViewport::before {
@@ -2558,146 +2772,189 @@
 }
 
 .conceptBlue .activityCard {
-  border-color: rgba(23, 43, 89, 0.12);
+  border-color: rgba(16, 40, 70, 0.11);
+  border-radius: 12px;
   background: #fff;
-  box-shadow: 0 9px 26px rgba(34, 67, 133, 0.06);
+  box-shadow: 0 8px 24px rgba(30, 66, 109, 0.055);
 }
 
 .conceptBlue .activityAvatar {
   border: 0;
-  background: #eef4ff;
-  color: #2448e8;
+  border-radius: 10px;
+  background: #e8f0f8;
+  color: #285998;
 }
 
 .conceptBlue .activityCopy strong {
-  color: #17213a;
+  color: #102846;
 }
 
 .conceptBlue .activityCopy p,
 .conceptBlue .activityCard time,
 .conceptBlue .prototypeNote,
 .conceptBlue .activityHeading > span {
-  color: #69758d;
+  color: #66778a;
 }
 
 .conceptBlue .activityCopy span {
-  border-color: rgba(36, 72, 232, 0.12);
-  background: #eef4ff;
-  color: #2448e8;
+  border-color: rgba(40, 89, 152, 0.12);
+  background: #e8f0f8;
+  color: #285998;
 }
 
 .conceptBlue .comparison {
-  border-top-color: rgba(23, 43, 89, 0.1);
-  background: #f4f7fc;
+  border-top-color: rgba(16, 40, 70, 0.08);
+  background: #f3f6fa;
 }
 
-.conceptBlue .comparisonViewport {
-  border-color: rgba(23, 43, 89, 0.12);
+.conceptBlue .comparisonBoard {
+  border-color: rgba(16, 40, 70, 0.13);
+  border-radius: 12px;
   background: #fff;
-  box-shadow: 0 16px 44px rgba(34, 67, 133, 0.07);
+  box-shadow: 0 16px 44px rgba(30, 66, 109, 0.07);
 }
 
-.conceptBlue .comparisonTable th,
-.conceptBlue .comparisonTable td {
-  border-bottom-color: rgba(23, 43, 89, 0.09);
+.conceptBlue .comparisonMatrix th,
+.conceptBlue .comparisonMatrix td {
+  border-bottom-color: rgba(16, 40, 70, 0.08);
 }
 
-.conceptBlue .comparisonTable thead th {
-  background: #193994;
+.conceptBlue .comparisonMatrix tr > * + * {
+  border-left-color: rgba(16, 40, 70, 0.08);
+}
+
+.conceptBlue .comparisonMatrix thead th {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+  background: #173f6e;
   color: #fff;
 }
 
-.conceptBlue .comparisonTable thead th span {
+.conceptBlue .comparisonMatrix tbody th {
+  color: #17334f;
+}
+
+.conceptBlue .comparisonMatrix tbody td {
+  color: #607184;
+}
+
+.conceptBlue .comparisonMethodSelector {
+  border-color: rgba(16, 40, 70, 0.13);
+  background: #e3ebf4;
+}
+
+.conceptBlue .comparisonMethodSelector button {
+  color: #607184;
+}
+
+.conceptBlue .comparisonMethodSelector .comparisonMethodActive {
+  background: #285998;
   color: #fff;
+  box-shadow: 0 5px 16px rgba(40, 89, 152, 0.2);
 }
 
-.conceptBlue .comparisonTable tbody th {
-  background: #fff;
-  color: #17213a;
-  box-shadow: 10px 0 18px rgba(34, 67, 133, 0.045);
+.conceptBlue .comparisonMobileDetail,
+.conceptBlue .comparisonMobileList > div {
+  border-color: rgba(16, 40, 70, 0.12);
 }
 
-.conceptBlue .comparisonTable tbody td {
-  color: #69758d;
+.conceptBlue .comparisonMobileSelected,
+.conceptBlue .comparisonMobileList dt {
+  color: #102846;
 }
 
-.conceptBlue .comparisonTable .comparisonEmphasis {
-  background: #eef4ff;
-  color: #17213a;
+.conceptBlue .comparisonMobileList dd {
+  color: #66778a;
 }
 
 .conceptBlue .comparisonCta {
-  border-color: #2448e8;
-  background: #2448e8;
+  border-color: #285998;
+  background: #285998;
   color: #fff;
 }
 
 .conceptBlue .comparisonCta:hover,
 .conceptBlue .comparisonCta:focus-visible {
-  border-color: #1739ce;
-  background: #1739ce;
+  border-color: #174579;
+  background: #174579;
 }
 
 .conceptBlue .reviews {
-  border-top-color: rgba(23, 43, 89, 0.1);
+  border-top-color: rgba(16, 40, 70, 0.08);
   background: #fff;
+}
+
+.conceptBlue .reviewGrid {
+  grid-template-columns: 1.16fr 1fr 0.84fr;
 }
 
 .conceptBlue .reviewCard {
-  border-color: rgba(23, 43, 89, 0.12);
-  background: #f9fbff;
-  box-shadow: 0 10px 30px rgba(34, 67, 133, 0.045);
+  border-color: rgba(16, 40, 70, 0.1);
+  border-radius: 14px;
+  background: #f8fafc;
+  box-shadow: none;
+}
+
+.conceptBlue .reviewCard:first-child {
+  background: #eaf1f8;
 }
 
 .conceptBlue .reviewStars {
-  color: #2448e8;
+  color: #285998;
 }
 
 .conceptBlue .financeRail {
-  border-color: rgba(23, 43, 89, 0.1);
-  background: #f5f8fd;
+  border-color: rgba(16, 40, 70, 0.08);
+  background: #f5f8fb;
 }
 
 .conceptBlue .financeViewport::before {
-  background: linear-gradient(90deg, #f5f8fd, transparent);
+  background: linear-gradient(90deg, #f5f8fb, transparent);
 }
 
 .conceptBlue .financeViewport::after {
-  background: linear-gradient(-90deg, #f5f8fd, transparent);
+  background: linear-gradient(-90deg, #f5f8fb, transparent);
+}
+
+.conceptBlue .financeGroup {
+  gap: 18px;
+  padding-right: 18px;
 }
 
 .conceptBlue .financeGroup li {
-  border-color: rgba(23, 43, 89, 0.09);
-  background: #fff;
-  box-shadow: 0 8px 22px rgba(34, 67, 133, 0.045);
+  width: 158px;
+  height: 62px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .conceptBlue .mobileConsultation {
-  border-top-color: rgba(23, 43, 89, 0.1);
-  background: #eef4ff;
+  border-top-color: rgba(16, 40, 70, 0.09);
+  background: #e8f0f8;
 }
 
 .conceptBlue .channels {
-  border-top-color: rgba(23, 43, 89, 0.1);
-  background: #f4f7fc;
+  border-top-color: rgba(16, 40, 70, 0.08);
+  background: #eef3f8;
 }
 
 .conceptBlue .channelBadge {
-  border-color: rgba(23, 43, 89, 0.12);
+  border-color: rgba(16, 40, 70, 0.1);
   background: #fff;
-  box-shadow: 0 10px 26px rgba(34, 67, 133, 0.06);
-  color: #17213a;
+  box-shadow: 0 10px 28px rgba(30, 66, 109, 0.065);
+  color: #102846;
 }
 
 .conceptBlue .channelBadge small {
-  border-left-color: rgba(23, 43, 89, 0.12);
-  color: #7b879d;
+  border-left-color: rgba(16, 40, 70, 0.12);
+  color: #718096;
 }
 
 .conceptBlue .footer {
-  border-top-color: rgba(23, 43, 89, 0.1);
-  background: #fff;
-  color: #17213a;
+  border-top-color: rgba(255, 255, 255, 0.08);
+  background: #0e2d52;
+  color: #fff;
 }
 
 .conceptBlue .footerLead p,
@@ -2706,30 +2963,30 @@
 .conceptBlue .footerBusiness address,
 .conceptBlue .footerContact a,
 .conceptBlue .footerBottom {
-  color: #69758d;
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .conceptBlue .footerBusinessName strong,
 .conceptBlue .footerContact a:nth-of-type(1) {
-  color: #17213a;
+  color: #fff;
 }
 
 .conceptBlue .footerBusinessName span {
-  border-left-color: rgba(23, 43, 89, 0.14);
-  color: #69758d;
+  border-left-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.58);
 }
 
 .conceptBlue .footerContact > span {
-  color: #2448e8;
+  color: #a9c9e9;
 }
 
 .conceptBlue .footerBottom {
-  border-top-color: rgba(23, 43, 89, 0.1);
+  border-top-color: rgba(255, 255, 255, 0.12);
 }
 
 .conceptBlue .quickActionInquiry,
 .conceptBlue .mobileFloatingCta {
-  background: #2448e8;
+  background: #285998;
   color: #fff;
 }
 
@@ -2776,6 +3033,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes successDialogEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -2836,8 +3105,16 @@
 
 @media (max-width: 960px) {
   .header {
+    position: sticky;
+    z-index: 30;
+    width: 100%;
+    min-height: 78px;
     grid-template-columns: 1fr auto auto;
     gap: 8px;
+    margin: 0;
+    background: rgba(8, 8, 7, 0.96);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(16px);
   }
 
   .header nav {
@@ -2910,6 +3187,10 @@
     display: inline-flex;
   }
 
+  .comparisonActions {
+    display: flex;
+  }
+
   .comparisonCtaDesktop {
     display: none;
   }
@@ -2922,7 +3203,7 @@
     display: block;
     max-width: 620px;
     margin: 0 auto;
-    scroll-margin-top: 96px;
+    scroll-margin-top: var(--header-scroll-offset);
   }
 
   .mobileMenu > button {
@@ -2954,7 +3235,7 @@
   .mobileMenuPanel {
     position: fixed;
     z-index: 1;
-    top: 96px;
+    top: 78px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -3116,7 +3397,7 @@
     min-height: 0;
     grid-template-columns: 1fr;
     gap: 56px;
-    padding-top: 160px;
+    padding-top: 72px;
     padding-bottom: 92px;
   }
 
@@ -3177,6 +3458,43 @@
 }
 
 @media (min-width: 961px) {
+  .header {
+    position: sticky;
+    z-index: 24;
+    width: 100%;
+    min-height: 78px;
+    margin: 0;
+    padding-right: max(
+      var(--page-gutter),
+      calc((100vw - var(--content-width)) / 2 + var(--page-gutter))
+    );
+    padding-left: max(
+      var(--page-gutter),
+      calc((100vw - var(--content-width)) / 2 + var(--page-gutter))
+    );
+    background: rgba(8, 8, 7, 0.96);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(16px);
+  }
+
+  .brandWordmark {
+    width: 100px;
+  }
+
+  .conceptC .hero,
+  .conceptC .heroInner {
+    min-height: max(752px, calc(100svh - 78px));
+  }
+
+  .conceptC .heroInner {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .advisorHeroActions {
+    display: none;
+  }
+
   .footerContact {
     padding-right: 188px;
   }
@@ -3249,7 +3567,7 @@
   .conceptA .heroInner,
   :is(.conceptB, .conceptC) .heroInner {
     gap: 46px;
-    padding: 128px 20px 64px;
+    padding: 48px 20px 64px;
   }
 
   .heroCopy h1 {
@@ -3573,49 +3891,108 @@
   }
 
   .comparisonHeading span {
+    font-size: 0.84rem;
     line-height: 1.65;
   }
 
-  .comparisonSwipeHint {
+  .comparisonDesktop {
+    display: none;
+  }
+
+  .comparisonMobile {
     display: block;
-    margin: 24px 20px 9px;
+    margin: 22px 20px 0;
+  }
+
+  .comparisonMethodSelector {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 3px;
+    border: 1px solid rgba(192, 166, 119, 0.16);
+    border-radius: 14px;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .comparisonMethodSelector button {
+    min-width: 0;
+    min-height: 44px;
+    border: 0;
+    border-radius: 10px;
+    padding: 0 4px;
+    background: transparent;
     color: var(--muted);
-    font-size: 0.62rem;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .comparisonMethodSelector button:focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 1px;
+  }
+
+  .comparisonMethodSelector .comparisonMethodActive {
+    background: var(--accent-soft);
+    color: #11100e;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.16);
+  }
+
+  .comparisonMobileDetail {
+    margin-top: 14px;
+    border-top: 1px solid rgba(192, 166, 119, 0.22);
+    border-bottom: 1px solid rgba(192, 166, 119, 0.22);
+  }
+
+  .comparisonMobileSelected {
+    margin: 0;
+    padding: 17px 2px 14px;
+    color: var(--ink);
+    font-size: 1.08rem;
+    font-weight: 750;
+    letter-spacing: -0.045em;
+  }
+
+  .comparisonMobileList {
+    margin: 0;
+  }
+
+  .comparisonMobileList > div {
+    display: grid;
+    min-height: 60px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+    border-top: 1px solid rgba(192, 166, 119, 0.12);
+    padding: 12px 2px;
+  }
+
+  .comparisonMobileList dt,
+  .comparisonMobileList dd {
+    margin: 0;
+  }
+
+  .comparisonMobileList dt {
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 720;
+    letter-spacing: -0.035em;
+  }
+
+  .comparisonMobileList dd {
+    color: var(--muted);
+    font-size: 0.94rem;
+    letter-spacing: -0.03em;
     text-align: right;
-  }
-
-  .comparisonViewport {
-    margin: 0 0 0 20px;
-    border-right: 0;
-    border-radius: 15px 0 0 15px;
-  }
-
-  .comparisonTable {
-    min-width: 860px;
-    font-size: 0.68rem;
-  }
-
-  .comparisonTable th,
-  .comparisonTable td {
-    height: 60px;
-    padding: 9px 12px;
-  }
-
-  .comparisonTable thead th {
-    height: 64px;
-    font-size: 0.72rem;
-  }
-
-  .comparisonTable thead th:first-child {
-    width: 112px;
-  }
-
-  .comparisonTable thead th:not(:first-child) {
-    width: 187px;
   }
 
   .comparisonNotice {
     margin: 13px 20px 0;
+    font-size: 0.75rem;
+    line-height: 1.7;
     text-align: left;
   }
 
@@ -3626,6 +4003,7 @@
   .comparisonCta {
     min-height: 50px;
     border-radius: 10px;
+    font-size: 0.9rem;
   }
 
   .reviews {
@@ -3718,14 +4096,14 @@
   }
 
   .financeGroup li {
-    width: 140px;
-    min-height: 64px;
-    padding-inline: 10px;
+    width: 150px;
+    height: 64px;
+    padding: 10px 12px;
   }
 
   .financeLogoFrame {
-    width: 116px;
-    height: 36px;
+    width: 126px;
+    height: 38px;
   }
 
   .footer {
@@ -3804,36 +4182,100 @@
   .advisorHeroContent {
     animation: none;
   }
+
+  .successDialog[open] {
+    animation: none;
+  }
+}
+
+/* Concept B responsive refinements */
+@media (min-width: 961px) {
+  .conceptBlue .hero,
+  .conceptBlue .heroInner {
+    min-height: max(740px, calc(100svh - 78px));
+  }
+
+  .conceptBlue .heroInner {
+    padding-top: 48px;
+    padding-bottom: 52px;
+  }
 }
 
 @media (max-width: 1180px) {
+  .conceptBlue .heroInner {
+    grid-template-columns: minmax(0, 1.12fr) minmax(360px, 0.72fr);
+    gap: 28px;
+  }
+
   .conceptBlue .advisorHeroCard {
-    grid-template-columns: minmax(0, 1.06fr) minmax(220px, 0.94fr);
+    grid-template-columns: minmax(0, 0.96fr) minmax(230px, 1.04fr);
   }
 
   .conceptBlue .advisorHeroContent {
-    padding: 38px 20px 36px 30px;
+    padding: 42px 26px 40px 30px;
+  }
+
+  .conceptBlue .advisorHeroContent h1 {
+    font-size: clamp(1.9rem, 2.7vw, 2.7rem);
+  }
+
+  .conceptBlue .trust {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 960px) {
+  .conceptBlue {
+    --header-scroll-offset: 84px;
+  }
+
+  .conceptBlue .header {
+    min-height: 70px;
+  }
+
+  .conceptBlue .mobileMenuPanel {
+    top: 70px;
+  }
+
+  .conceptBlue .hero {
+    min-height: auto;
+  }
+
+  .conceptBlue .hero::after {
+    inset: 0;
+    background: rgba(217, 229, 241, 0.46);
+    clip-path: none;
+  }
+
+  .conceptBlue .heroInner {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    padding-top: 42px;
+    padding-bottom: 62px;
+  }
+
+  .conceptBlue .advisorHeroCard {
+    max-width: 720px;
+    grid-template-columns: minmax(0, 0.95fr) minmax(250px, 1.05fr);
+  }
+
   .conceptBlue .mobileFloatingCta {
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 14px 34px rgba(36, 72, 232, 0.25);
+    border-color: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 14px 34px rgba(40, 89, 152, 0.26);
   }
 
   .conceptBlue .mobileMenu > button,
   .conceptBlue .headerCall {
-    border-color: rgba(23, 43, 89, 0.18);
-    color: #2448e8;
+    border-color: rgba(16, 40, 70, 0.18);
+    color: #285998;
   }
 
   .conceptBlue .mobileMenu > button:hover,
   .conceptBlue .mobileMenu > button:focus-visible,
   .conceptBlue .mobileMenu:has(.mobileMenuPanel[data-open="true"]) > button {
-    border-color: rgba(36, 72, 232, 0.42);
-    background: #eef4ff;
-    color: #2448e8;
+    border-color: rgba(40, 89, 152, 0.4);
+    background: #e8f0f8;
+    color: #285998;
   }
 
   .conceptBlue .header:has(.mobileMenuPanel[data-open="true"]) {
@@ -3842,48 +4284,48 @@
 
   .conceptBlue .mobileMenuPanel {
     background:
-      radial-gradient(circle at 88% 8%, rgba(36, 72, 232, 0.09), transparent 30%),
+      radial-gradient(circle at 88% 8%, rgba(40, 89, 152, 0.08), transparent 30%),
       rgba(255, 255, 255, 0.99);
-    color: #17213a;
+    color: #102846;
   }
 
   .conceptBlue .mobileMenuPanel[data-open="true"] {
-    border-top-color: rgba(23, 43, 89, 0.1);
+    border-top-color: rgba(16, 40, 70, 0.1);
   }
 
   .conceptBlue .mobileMenuHeading {
-    border-bottom-color: rgba(23, 43, 89, 0.12);
+    border-bottom-color: rgba(16, 40, 70, 0.12);
   }
 
   .conceptBlue .mobileMenuHeading p,
   .conceptBlue .mobileMenuPanel nav a span,
   .conceptBlue .mobileMenuFooter span {
-    color: #2448e8;
+    color: #285998;
   }
 
   .conceptBlue .mobileMenuHeading span,
   .conceptBlue .mobileMenuFooter p {
-    color: #69758d;
+    color: #66778a;
   }
 
   .conceptBlue .mobileMenuPanel nav a {
-    border-bottom-color: rgba(23, 43, 89, 0.1);
-    color: #17213a;
+    border-bottom-color: rgba(16, 40, 70, 0.1);
+    color: #102846;
   }
 
   .conceptBlue .mobileMenuPanel nav a:hover,
   .conceptBlue .mobileMenuPanel nav a:focus-visible {
-    border-color: rgba(36, 72, 232, 0.35);
-    color: #2448e8;
+    border-color: rgba(40, 89, 152, 0.34);
+    color: #285998;
   }
 
   .conceptBlue .mobileMenuPanel nav a svg {
-    color: #96a1b5;
+    color: #8d9cad;
   }
 
   .conceptBlue .mobileMenuPanel nav a[data-consultation="true"] {
-    border-color: #2448e8;
-    background: #2448e8;
+    border-color: #285998;
+    background: #285998;
     color: #fff;
   }
 
@@ -3894,76 +4336,189 @@
 
   .conceptBlue .mobileMenuPanel nav a[data-consultation="true"]:hover,
   .conceptBlue .mobileMenuPanel nav a[data-consultation="true"]:focus-visible {
-    border-color: #1739ce;
-    background: #1739ce;
-  }
-
-  .conceptBlue .heroInner {
-    grid-template-columns: 1fr;
-  }
-
-  .conceptBlue .advisorHeroCard {
-    max-width: 680px;
-    grid-template-columns: minmax(0, 1.06fr) minmax(230px, 0.94fr);
+    border-color: #174579;
+    padding-left: 18px;
+    background: #174579;
   }
 }
 
 @media (max-width: 640px) {
   .conceptBlue .header {
-    border-bottom-color: rgba(23, 43, 89, 0.1);
+    min-height: 68px;
+    padding-inline: 18px;
+  }
+
+  .conceptBlue .brandMark {
+    width: 72px;
+  }
+
+  .conceptBlue .brandWordmark {
+    width: 70px;
+  }
+
+  .conceptBlue .mobileMenuPanel {
+    top: 68px;
   }
 
   .conceptBlue .heroVideo {
-    object-position: 60% center;
-    opacity: 0.28;
+    object-position: 62% center;
+    opacity: 0.14;
   }
 
   .conceptBlue .videoOverlay {
-    background: linear-gradient(180deg, rgba(244, 248, 255, 0.94), rgba(234, 241, 251, 0.97));
+    background: linear-gradient(180deg, rgba(246, 249, 252, 0.96), rgba(231, 239, 247, 0.97));
+  }
+
+  .conceptBlue .heroInner {
+    gap: 0;
+    padding: 24px 20px 44px;
   }
 
   .conceptBlue .advisorHeroCard {
     grid-template-columns: 1fr;
+    box-shadow: 0 20px 52px rgba(30, 66, 109, 0.14);
   }
 
   .conceptBlue .advisorHeroCard::before {
-    inset: 205px 0 0;
-    border-radius: 24px;
+    inset: 0;
+    border-radius: 18px;
+    box-shadow: none;
   }
 
   .conceptBlue .advisorHeroVisual {
+    width: 100%;
     order: 1;
     padding: 0;
   }
 
-  .conceptBlue .advisorHeroVisual::before {
-    inset: 15px -6px -8px 18px;
-    border-radius: 22px;
-    transform: translate(4px, 2px);
+  .conceptBlue .advisorHeroPortrait {
+    aspect-ratio: 1.18;
+    min-height: 0;
+    margin: 0;
+    border-radius: 18px 18px 0 0;
   }
 
-  .conceptBlue .advisorHeroPortrait {
-    border-radius: 22px;
+  .conceptBlue .advisorHeroPortrait img {
+    object-position: center 29%;
+  }
+
+  .conceptBlue .advisorHeroNameplate {
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
   }
 
   .conceptBlue .advisorHeroContent {
     order: 2;
-    padding: 28px 24px 30px;
+    margin: 0;
+    border-radius: 0 0 18px 18px;
+    padding: 27px 24px 28px;
   }
 
-  .conceptBlue .advisorHeroNameplate {
-    right: 18px;
-    left: 20px;
+  .conceptBlue .advisorHeroContent h1 {
+    margin-top: 17px;
+    font-size: clamp(1.82rem, 8.4vw, 2.18rem);
+  }
+
+  .conceptBlue .advisorHeroDescription {
+    margin-top: 14px;
+    font-size: 0.68rem;
+  }
+
+  .conceptBlue .advisorHeroActions {
+    margin-top: 20px;
+  }
+
+  .conceptBlue .trust {
+    gap: 24px;
+    padding: 40px 20px 44px;
+    background: #285998;
+  }
+
+  .conceptBlue .trustIntro {
+    display: block;
+  }
+
+  .conceptBlue .trustIntro h2 {
+    margin-top: 18px;
+  }
+
+  .conceptBlue .trustList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
   }
 
   .conceptBlue .trustList li,
   .conceptBlue .trustList li:nth-child(3),
   .conceptBlue .trustList li:last-child {
-    border-color: rgba(36, 72, 232, 0.13);
-    background: #fff;
+    min-height: 168px;
+    grid-template-columns: 1fr;
+    align-content: start;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.055);
   }
 
-  .conceptBlue .comparisonViewport {
-    border-color: rgba(23, 43, 89, 0.12);
+  .conceptBlue .trustIcon {
+    grid-row: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .conceptBlue .trustList li > span {
+    top: 15px;
+    right: 14px;
+  }
+
+  .conceptBlue .trustList h3 {
+    margin-top: 16px;
+    font-size: 0.88rem;
+  }
+
+  .conceptBlue .trustList p {
+    margin-top: 6px;
+    padding-right: 0;
+    font-size: 0.68rem;
+    line-height: 1.5;
+  }
+
+  .conceptBlue .activity {
+    padding-top: 30px;
+    padding-bottom: 24px;
+  }
+
+  .conceptBlue .reviewGrid {
+    grid-template-columns: none;
+  }
+
+  .conceptBlue .reviewCard {
+    border-radius: 12px;
+  }
+
+  .conceptBlue .formPanel {
+    max-width: none;
+  }
+
+  .conceptBlue .comparisonMatrix thead th:first-child,
+  .conceptBlue .comparisonMatrix tbody th {
+    background: #f0f4f8;
+    box-shadow: 10px 0 18px rgba(30, 66, 109, 0.06);
+  }
+
+  .conceptBlue .financeGroup {
+    gap: 12px;
+    padding-right: 12px;
+  }
+
+  .conceptBlue .financeGroup li {
+    width: 142px;
+    height: 58px;
+    padding: 8px 10px;
   }
 }

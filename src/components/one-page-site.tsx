@@ -1,12 +1,9 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
-  Banknote,
   CalendarClock,
-  CarFront,
-  CreditCard,
   Eye,
   FileText,
   HandCoins,
@@ -16,8 +13,10 @@ import {
 } from "lucide-react";
 
 import { ConceptSwitcher } from "@/components/concept-switcher";
+import { ConsultationForm } from "@/components/consultation-form";
 import { MobileFloatingConsultation } from "@/components/mobile-floating-consultation";
 import { MobileNavigation } from "@/components/mobile-navigation";
+import { PurchaseComparison } from "@/components/purchase-comparison";
 import { siteContent } from "@/content/site";
 
 import styles from "./one-page-site.module.css";
@@ -103,23 +102,23 @@ const activityItems = [
 ] as const;
 
 const financialPartners = [
-  { name: "현대캐피탈", logo: "/finance-logos/hyundai-capital.svg" },
-  { name: "하나캐피탈", logo: "/finance-logos/hana-capital.svg" },
-  { name: "KB캐피탈", logo: "/finance-logos/kb-capital.svg" },
-  { name: "우리금융캐피탈", logo: "/finance-logos/woori-financial-capital.svg" },
-  { name: "우리카드", logo: "/finance-logos/woori-card.svg" },
-  { name: "JB우리캐피탈", logo: "/finance-logos/jb-woori-capital.svg" },
-  { name: "신한카드", logo: "/finance-logos/shinhan-card.svg" },
-  { name: "BNK캐피탈", logo: "/finance-logos/bnk-capital.svg" },
-  { name: "오릭스캐피탈", logo: "/finance-logos/orix.gif" },
-  { name: "롯데캐피탈", logo: "/finance-logos/lotte-capital.png" },
-  { name: "롯데렌터카", logo: "/finance-logos/lotte-rent-a-car.png" },
-  { name: "iM캐피탈", logo: "/finance-logos/im-capital.png" },
-  { name: "NH캐피탈", logo: "/finance-logos/nh-capital.svg" },
-  { name: "MG캐피탈", logo: "/finance-logos/mg-capital.svg" },
-  { name: "메리츠캐피탈", logo: "/finance-logos/meritz-capital.png" },
-  { name: "삼성카드", logo: "/finance-logos/samsung-card.jpg" },
-  { name: "산은캐피탈", logo: "/finance-logos/kdb-capital.gif" },
+  { name: "현대캐피탈", logo: "/finance-logos/hyundai-capital.svg", width: "96%", height: "60%" },
+  { name: "하나캐피탈", logo: "/finance-logos/hana-capital.svg", width: "88%", height: "72%" },
+  { name: "KB캐피탈", logo: "/finance-logos/kb-capital.svg", width: "88%", height: "72%" },
+  { name: "우리금융캐피탈", logo: "/finance-logos/woori-financial-capital.svg", width: "94%", height: "58%" },
+  { name: "우리카드", logo: "/finance-logos/woori-card.svg", width: "82%", height: "72%" },
+  { name: "JB우리캐피탈", logo: "/finance-logos/jb-woori-capital.svg", width: "96%", height: "58%" },
+  { name: "신한카드", logo: "/finance-logos/shinhan-card.svg", width: "88%", height: "72%" },
+  { name: "BNK캐피탈", logo: "/finance-logos/bnk-capital.svg", width: "96%", height: "58%" },
+  { name: "오릭스캐피탈", logo: "/finance-logos/orix.gif", width: "76%", height: "88%", blend: true },
+  { name: "롯데캐피탈", logo: "/finance-logos/lotte-capital.png", width: "84%", height: "82%" },
+  { name: "롯데렌터카", logo: "/finance-logos/lotte-rent-a-car.png", width: "88%", height: "80%" },
+  { name: "iM캐피탈", logo: "/finance-logos/im-capital.png", width: "94%", height: "62%" },
+  { name: "NH캐피탈", logo: "/finance-logos/nh-capital.svg", width: "96%", height: "58%" },
+  { name: "MG캐피탈", logo: "/finance-logos/mg-capital.svg", width: "82%", height: "82%" },
+  { name: "메리츠캐피탈", logo: "/finance-logos/meritz-capital.png", width: "65%", height: "96%" },
+  { name: "삼성카드", logo: "/finance-logos/samsung-card.jpg", width: "88%", height: "72%", blend: true },
+  { name: "산은캐피탈", logo: "/finance-logos/kdb-capital.gif", width: "92%", height: "68%", blend: true },
 ] as const;
 
 const reviewItems = [
@@ -137,97 +136,6 @@ const reviewItems = [
     title: "투명한 견적",
     quote: "월 납입료만 저렴하게 보여주는 견적이 아니라 좋았습니다.",
     body: null,
-  },
-] as const;
-
-const purchaseMethods = [
-  { title: "리스", icon: FileText },
-  { title: "장기렌트", icon: CarFront },
-  { title: "할부", icon: CreditCard },
-  { title: "일시불", icon: Banknote },
-] as const;
-
-const comparisonRows = [
-  {
-    label: "등록 명의",
-    cells: [
-      { text: "리스사", note: "계약자 이용" },
-      { text: "렌트사" },
-      { text: "구매자", note: "내 명의" },
-      { text: "구매자", note: "내 명의" },
-    ],
-  },
-  {
-    label: "번호판",
-    cells: [
-      { text: "일반 번호판", emphasis: true },
-      { text: "하 · 허 · 호" },
-      { text: "일반 번호판" },
-      { text: "일반 번호판" },
-    ],
-  },
-  {
-    label: "자동차 보험",
-    cells: [
-      { text: "이용자 직접 가입" },
-      { text: "렌트사 보험 적용", emphasis: true },
-      { text: "구매자 직접 가입" },
-      { text: "구매자 직접 가입" },
-    ],
-  },
-  {
-    label: "차량 정비",
-    cells: [
-      { text: "직접 관리" },
-      { text: "상품에 따라 선택", note: "정비 포함형 가능" },
-      { text: "직접 관리" },
-      { text: "직접 관리" },
-    ],
-  },
-  {
-    label: "계약 기간",
-    cells: [
-      { text: "상품별 약정 기간" },
-      { text: "상품별 약정 기간" },
-      { text: "금융사별 약정 기간" },
-      { text: "제한 없음", emphasis: true },
-    ],
-  },
-  {
-    label: "주행 거리",
-    cells: [
-      { text: "약정 거리 설정" },
-      { text: "약정 거리 설정", note: "무제한 상품 가능" },
-      { text: "제한 없음" },
-      { text: "제한 없음" },
-    ],
-  },
-  {
-    label: "비용 처리",
-    cells: [
-      { text: "업무용도에 따라 처리", note: "세무 확인 필요" },
-      { text: "업무용도에 따라 처리", note: "세무 확인 필요" },
-      { text: "감가상각 등 기준 적용", note: "세무 확인 필요" },
-      { text: "감가상각 등 기준 적용", note: "세무 확인 필요" },
-    ],
-  },
-  {
-    label: "금융 심사",
-    cells: [
-      { text: "금융사 심사 필요" },
-      { text: "렌트사 심사 필요" },
-      { text: "대출 심사 필요" },
-      { text: "별도 대출 없음", emphasis: true },
-    ],
-  },
-  {
-    label: "계약 만기",
-    cells: [
-      { text: "반납 · 연장 · 인수" },
-      { text: "반납 · 연장 · 인수" },
-      { text: "상환 완료 · 계속 보유" },
-      { text: "구매 즉시 소유", emphasis: true },
-    ],
   },
 ] as const;
 
@@ -310,10 +218,14 @@ function AdvisorHeroCard({
       </div>
 
       <div className={styles.advisorHeroContent}>
-        <p className={styles.advisorHeroEyebrow}>US AUTO · 김용욱 대표</p>
+        <p className={styles.advisorHeroEyebrow}>
+          {concept === "b" ? "US AUTO · CAR BUYING DESK" : "US AUTO · 김용욱 대표"}
+        </p>
         <h1 id={titleId}>{title}</h1>
         <p className={styles.advisorHeroDescription}>
-          일시불 · 할부 · 장기렌트 · 리스를 한 번에 비교해드립니다.
+          {concept === "b"
+            ? "차량 할인부터 금융 조건까지 한 번에 비교해 가장 합리적인 구매 방법을 안내합니다."
+            : "일시불 · 할부 · 장기렌트 · 리스를 한 번에 비교해드립니다."}
         </p>
 
         <div className={styles.advisorHeroActions}>
@@ -365,101 +277,6 @@ function FloatingConsultationActions({ concept }: { concept: Concept }) {
       </aside>
       <MobileFloatingConsultation concept={concept} />
     </>
-  );
-}
-
-type ConsultationPlacement = "desktop" | "mobile";
-
-function ConsultationForm({
-  concept,
-  placement,
-}: {
-  concept: Concept;
-  placement: ConsultationPlacement;
-}) {
-  const formId = `consultation-${concept}-${placement}`;
-  const titleId = `form-title-${concept}-${placement}`;
-
-  return (
-    <aside
-      className={`${styles.formPanel} ${
-        placement === "desktop" ? styles.desktopFormPanel : styles.mobileFormPanel
-      }`}
-      id={formId}
-      aria-labelledby={titleId}
-    >
-      <div className={styles.formHeading}>
-        <p>PRIVATE CONSULTATION</p>
-        <h2 id={titleId}>차량 상담 신청</h2>
-        <p className={styles.formDescription}>
-          비교 중인 견적이 있어도 괜찮습니다. 확인 후 김용욱 대표가 직접 연락드립니다.
-        </p>
-      </div>
-
-      <form className={styles.form}>
-        <div className={styles.formRow}>
-          <label>
-            <span>
-              이름 <em>필수</em>
-            </span>
-            <input autoComplete="name" name="name" placeholder="성함을 입력해 주세요" type="text" />
-          </label>
-          <label>
-            <span>
-              연락처 <em>필수</em>
-            </span>
-            <input
-              autoComplete="tel"
-              inputMode="tel"
-              name="phone"
-              placeholder="010-0000-0000"
-              type="tel"
-            />
-          </label>
-        </div>
-
-        <div className={styles.formDetailRow}>
-          <label>
-            <span>
-              관심 차량 <em>선택</em>
-            </span>
-            <input name="vehicle" placeholder="예: GV80" type="text" />
-          </label>
-          <label>
-            <span>
-              구매 방식 <em>선택</em>
-            </span>
-            <select defaultValue="" name="purchaseMethod">
-              <option disabled value="">
-                선택해 주세요
-              </option>
-              <option value="cash">일시불</option>
-              <option value="installment">할부</option>
-              <option value="lease">리스</option>
-              <option value="long-term-rental">장기렌트</option>
-            </select>
-          </label>
-        </div>
-
-        <label className={styles.agreement}>
-          <input name="agreement" type="checkbox" />
-          <span>개인정보 수집 및 이용에 동의합니다. (필수)</span>
-        </label>
-
-        <button type="button">
-          상담 신청하기
-          <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} />
-        </button>
-      </form>
-
-      <div className={styles.formFooter}>
-        <span>전화로 바로 상담</span>
-        <a href={siteContent.phoneHref}>
-          <Phone aria-hidden="true" size={15} strokeWidth={1.8} />
-          {siteContent.phone}
-        </a>
-      </div>
-    </aside>
   );
 }
 
@@ -614,77 +431,7 @@ export function OnePageSite({ concept }: OnePageSiteProps) {
         <p className={styles.prototypeNote}>현재 상담 현황은 화면 구성을 위한 예시 데이터입니다.</p>
       </section>
 
-      <section
-        className={styles.comparison}
-        id={`comparison-${sectionSuffix}`}
-        aria-labelledby={`comparison-title-${sectionSuffix}`}
-      >
-        <div className={styles.comparisonInner}>
-          <header className={styles.comparisonHeading}>
-            <p>PURCHASE GUIDE</p>
-            <h2 id={`comparison-title-${sectionSuffix}`}>차량 구매 방식, 한눈에 비교</h2>
-            <span>리스 · 장기렌트 · 할부 · 일시불의 핵심 차이를 확인해 보세요.</span>
-          </header>
-
-          <p className={styles.comparisonSwipeHint}>표를 좌우로 밀어 비교해 보세요.</p>
-          <div className={styles.comparisonViewport} tabIndex={0}>
-            <table className={styles.comparisonTable}>
-              <caption className={styles.visuallyHidden}>
-                리스, 장기렌트, 할부, 일시불 구매 방식 비교
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">항목</th>
-                  {purchaseMethods.map((method) => {
-                    const Icon = method.icon;
-                    return (
-                      <th key={method.title} scope="col">
-                        <span>
-                          <Icon aria-hidden="true" size={18} strokeWidth={1.7} />
-                          {method.title}
-                        </span>
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((row) => (
-                  <tr key={row.label}>
-                    <th scope="row">{row.label}</th>
-                    {row.cells.map((cell, index) => (
-                      <td className={"emphasis" in cell && cell.emphasis ? styles.comparisonEmphasis : undefined} key={`${row.label}-${purchaseMethods[index].title}`}>
-                        <span>{cell.text}</span>
-                        {"note" in cell && cell.note ? <small>{cell.note}</small> : null}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <p className={styles.comparisonNotice}>
-            실제 조건과 비용은 차종, 금융사, 심사 결과, 계약 상품 및 세무 기준에 따라 달라질 수 있습니다.
-          </p>
-          <div className={styles.comparisonActions}>
-            <a
-              className={`${styles.comparisonCta} ${styles.comparisonCtaDesktop}`}
-              href={`#consultation-${sectionSuffix}-desktop`}
-            >
-              내 조건으로 상담 받기
-              <ArrowDown aria-hidden="true" size={17} strokeWidth={1.8} />
-            </a>
-            <a
-              className={`${styles.comparisonCta} ${styles.comparisonCtaMobile}`}
-              href={`#consultation-${sectionSuffix}-mobile`}
-            >
-              내 조건으로 상담 받기
-              <ArrowDown aria-hidden="true" size={17} strokeWidth={1.8} />
-            </a>
-          </div>
-        </div>
-      </section>
+      <PurchaseComparison sectionSuffix={sectionSuffix} />
 
       <section className={styles.reviews} id={`reviews-${sectionSuffix}`}>
         <div className={styles.reviewsInner}>
@@ -736,9 +483,11 @@ export function OnePageSite({ concept }: OnePageSiteProps) {
                       <Image
                         alt={partner.name}
                         className={styles.financeLogo}
+                        data-blend={"blend" in partner ? partner.blend : undefined}
                         height={38}
                         loading="eager"
                         src={partner.logo}
+                        style={{ height: partner.height, width: partner.width }}
                         unoptimized
                         width={132}
                       />
