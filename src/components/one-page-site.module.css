@@ -2351,6 +2351,10 @@
   margin-top: 28px;
 }
 
+.conceptC:not(.conceptBlue) .trustList li > span {
+  display: none;
+}
+
 .conceptC .activity {
   background:
     radial-gradient(circle at 84% 10%, rgba(166, 138, 92, 0.06), transparent 24%),
@@ -2396,16 +2400,71 @@
   background: rgba(255, 255, 255, 0.065);
 }
 
-.conceptC .financeRail {
+.conceptC:not(.conceptBlue) .financeRail {
+  border-color: rgba(198, 170, 122, 0.16);
+  padding: 20px 0 18px;
   background: #0b0b0a;
 }
 
-.conceptC .financeViewport::before {
-  background: linear-gradient(90deg, #0b0b0a, transparent);
+.conceptC:not(.conceptBlue) .financeViewport::before {
+  background: linear-gradient(90deg, #0b0b0a 16%, rgba(11, 11, 10, 0));
 }
 
-.conceptC .financeViewport::after {
-  background: linear-gradient(-90deg, #0b0b0a, transparent);
+.conceptC:not(.conceptBlue) .financeViewport::after {
+  background: linear-gradient(-90deg, #0b0b0a 16%, rgba(11, 11, 10, 0));
+}
+
+.conceptC:not(.conceptBlue) .financeHeading {
+  position: static;
+  width: min(100%, var(--content-width));
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  padding: 0 var(--page-gutter) 18px;
+  white-space: normal;
+}
+
+.conceptC:not(.conceptBlue) .financeHeading p {
+  color: var(--accent-soft);
+}
+
+.conceptC:not(.conceptBlue) .financeHeading h2 {
+  color: #fff;
+}
+
+.conceptC:not(.conceptBlue) .financeHeading > span {
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.conceptC:not(.conceptBlue) .financeGroup {
+  gap: 30px;
+  padding-right: 30px;
+}
+
+.conceptC:not(.conceptBlue) .financeGroup li {
+  width: 164px;
+  height: 58px;
+  border-color: transparent;
+  border-radius: 0;
+  padding: 7px 14px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.conceptC:not(.conceptBlue) .financeLogoFrame {
+  width: 136px;
+  height: 42px;
+}
+
+.conceptC:not(.conceptBlue) .financeLogo {
+  filter: brightness(1.12) saturate(0.92);
+}
+
+.conceptC:not(.conceptBlue) .financeLogo[data-blend="true"] {
+  filter: grayscale(1) invert(1) brightness(1.65);
+  mix-blend-mode: screen;
 }
 
 .conceptC .financeGroup li {
@@ -3094,6 +3153,33 @@
 
   .trustIntro h2 {
     margin: 0;
+  }
+}
+
+@media (min-width: 1181px) {
+  .conceptC:not(.conceptBlue) .trust {
+    grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .conceptC:not(.conceptBlue) .trustIntro {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+
+  .conceptC:not(.conceptBlue) .trustIntro h2 {
+    margin-top: 36px;
+    font-size: clamp(1.5rem, 1.9vw, 1.85rem);
+    line-height: 1.42;
+  }
+
+  .conceptC:not(.conceptBlue) .trustIntro h2 span {
+    white-space: nowrap;
+  }
+
+  .conceptC:not(.conceptBlue) .trustList li,
+  .conceptC:not(.conceptBlue) .trustList li:last-child {
+    min-height: 260px;
   }
 }
 
@@ -4101,7 +4187,23 @@
     padding: 10px 12px;
   }
 
+  .conceptC:not(.conceptBlue) .financeGroup {
+    gap: 22px;
+    padding-right: 22px;
+  }
+
+  .conceptC:not(.conceptBlue) .financeGroup li {
+    width: 142px;
+    height: 50px;
+    padding: 5px 8px;
+  }
+
   .financeLogoFrame {
+    width: 126px;
+    height: 38px;
+  }
+
+  .conceptC:not(.conceptBlue) .financeLogoFrame {
     width: 126px;
     height: 38px;
   }
