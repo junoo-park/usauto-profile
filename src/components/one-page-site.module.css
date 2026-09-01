@@ -2322,7 +2322,7 @@
 }
 
 .conceptC .trustList {
-  gap: 12px;
+  gap: 8px;
 }
 
 .conceptC .trustList li,
@@ -3911,7 +3911,7 @@
   }
 
   .conceptC .trustList {
-    gap: 10px;
+    gap: 8px;
   }
 
   .conceptC .trustIcon {
